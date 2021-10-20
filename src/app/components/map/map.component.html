@@ -1,7 +1,6 @@
+<input #mapSearchField class="my-map-search-field" type="text" placeholder="Ingrese la dirección"/>
 <google-map
-  height="700px"
-  width="50%"
-  [zoom]="zoom"
+  width="40%"
   [center]="center"
   [options]="options"
  
@@ -19,6 +18,3 @@
   <map-info-window>{{ infoContent }}</map-info-window>
 </google-map>
 
-<button (click)="zoomIn()">Zoom in</button>
-<button (click)="zoomOut()">Zoom out</button>
-<button (click)="logCenter()">Log center</button>

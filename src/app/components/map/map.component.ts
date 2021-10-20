@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
+import { BoundTextAst } from '@angular/compiler';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps'
 
 @Component({
@@ -8,16 +9,16 @@ import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps'
 })
 export class MapComponent implements OnInit {
 
-  @ViewChild(GoogleMap, { static: false }) map: any;
-  @ViewChild(MapInfoWindow, { static: false }) info: any;
+  @ViewChild(GoogleMap)
+  map!: GoogleMap;
+  @ViewChild('mapSearchField')
+  searchField!: ElementRef;
 
   zoom: number = 20;
   center: any;
   options: google.maps.MapOptions = {
-    mapTypeId: 'hybrid',
-    zoomControl: false,
-    scrollwheel: false,
-    disableDoubleClickZoom: true,
+    disableDefaultUI: true,
+    zoomControl: true,
     maxZoom: 20,
     minZoom: 8,
   }
@@ -37,6 +38,37 @@ export class MapComponent implements OnInit {
     })
   }
 
+  ngAfterViewInit(): void {
+    const searchBox = new google.maps.places.SearchBox(
+      this.searchField.nativeElement,
+    );
+    this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(
+      this.searchField.nativeElement,
+    );
+    searchBox.addListener('places_changed', () => {
+      const places = searchBox.getPlaces();
+      console.log(places);
+      if (places.length === 0) {
+        return;
+      }
+      const bounds = new google.maps.LatLngBounds();
+      console.log(bounds)
+      places.forEach(place => {
+        if (!place.geometry || !place.geometry.location) {
+          return;
+        }
+        if (place.geometry.viewport) {
+          bounds.union(place.geometry.viewport)
+        } else {
+          bounds.extend(place.geometry.location);
+        }
+      });
+      this.map.fitBounds(bounds);
+    })
+
+  };
+
+
   zoomIn() {
     if (this.options != null && this.options.maxZoom != null)
       if (this.zoom < this.options.maxZoom) this.zoom++
@@ -47,7 +79,7 @@ export class MapComponent implements OnInit {
 
     if (this.options != null && this.options.minZoom != null)
       if (this.zoom > this.options.minZoom) this.zoom--
-      console.log(this.zoom)
+    console.log(this.zoom)
   }
 
   logCenter() {
@@ -72,8 +104,5 @@ export class MapComponent implements OnInit {
     })
   }
 
-  openInfo(marker: MapMarker, content: any) {
-    this.infoContent = content
-    this.info.open(marker)
-  }
+
 }
