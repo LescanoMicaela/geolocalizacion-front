@@ -1,20 +1,19 @@
-<input #mapSearchField class="my-map-search-field" type="text" placeholder="Ingrese la dirección"/>
-<google-map
-  width="40%"
-  [center]="center"
-  [options]="options"
- 
->
-  <map-marker
-    #markerElem
-    *ngFor="let marker of markers"
-    [position]="marker.position"
-    [label]="marker.label"
-    [title]="marker.title"
-    [options]="marker.options"
-  >
-  </map-marker>
+<div>
+  <input #mapSearchField class="my-map-search-field" type="text" placeholder="Buscar" />
+  <google-map width="100%" [center]="center" [options]="options">
+    <map-marker #markerElem *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
+      [title]="marker.title" [options]="marker.options">
+    </map-marker>
 
-  <map-info-window>{{ infoContent }}</map-info-window>
-</google-map>
+    <map-info-window>{{ infoContent }}</map-info-window>
+  </google-map>
 
+
+  <div class="d-flex flex-row bd-highlight mb-3" width="100%">
+    <div class="p-2 bd-highlight" width="10%"><img src="{{imageSrc}}" alt="{{imageAlt}}" width="40px" /></div>
+    <div class="p-2 bd-highlight">
+      <h3>Calle ejemplo 13</h3>
+      <p>28026, Madrid</p>
+    </div>
+  </div>
+</div>

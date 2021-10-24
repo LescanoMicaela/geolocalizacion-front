@@ -1,7 +1,9 @@
-<h2>Colonias Felinas</h2>
+<div class="container-sm pt-3 app">
 
+<app-header></app-header>
 <ul class="list-group">
     <li  *ngFor=" let c of colonias; let i=index;" class="list-group-item">Colonia {{c.id}} - Gatos: {{c.numGatos}}</li>
   </ul>
 
-<app-map></app-map>
+<app-map [colonias]=colonias></app-map>
+</div>
