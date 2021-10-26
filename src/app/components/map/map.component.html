@@ -9,11 +9,13 @@
   </google-map>
 
 
+  <div>
   <div  *ngFor=" let c of colonias;" class="d-flex flex-row bd-highlight mb-3" width="100%">
     <div class="p-2 bd-highlight" width="10%"><img src="{{imageSrc}}" alt="{{imageAlt}}" width="40px" /></div>
-    <div class="p-2 bd-highlight">
+    <div *ngIf="c.direccion" class="p-2 bd-highlight">
       <h3>{{c.direccion[0]}}</h3> 
       <p>{{c.direccion[1]}}</p>
     </div>
   </div>
+</div>
 </div>

@@ -10,13 +10,14 @@ import { TokenStorageService } from '@app/services/token-storage.service';
 })
 export class HeaderComponent implements OnInit {
 
-  currentUser: any;
+  currentUser: any = ''
 
   constructor(private token: TokenStorageService) { }
 
   ngOnInit(): void {
     console.log(this.token.getUser())
-    this.currentUser = this.token.getUser();
+    let usuario =  this.token.getUser();
+    usuario ? this.currentUser = usuario : '';
   }
 
 

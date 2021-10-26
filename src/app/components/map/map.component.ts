@@ -1,8 +1,6 @@
-import { BoundTextAst } from '@angular/compiler';
 import { Component, ElementRef, OnInit, ViewChild, Input, SimpleChanges } from '@angular/core'
-import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps'
+import { GoogleMap } from '@angular/google-maps'
 import { ColoniaModel } from 'src/app/model/colonia.model';
-import { ColoniaComponent } from '../colonia/colonia.component';
 
 @Component({
   selector: 'app-map',
@@ -12,11 +10,11 @@ import { ColoniaComponent } from '../colonia/colonia.component';
 export class MapComponent implements OnInit {
 
   @ViewChild(GoogleMap)
-  map!: GoogleMap;
+  map: GoogleMap;
   @ViewChild('mapSearchField')
   searchField!: ElementRef;
 
-  imageSrc = 'assets/images/cat-black-face.png'  
+  imageSrc = 'assets/images/cat-black-face.png'
   imageAlt = 'cat icon'
 
   @Input()
@@ -44,9 +42,8 @@ export class MapComponent implements OnInit {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       }
-      this.addMarker(position.coords.latitude,position.coords.longitude )
+      this.addMarker(position.coords.latitude, position.coords.longitude)
     })
-
   }
 
 
@@ -55,13 +52,10 @@ export class MapComponent implements OnInit {
     if (changes['colonias']) {
       this.colonias.forEach(
         c => {
-          this.addMarker(c.latitud,c.longitud)
-          this.getAddress(c.latitud,c.longitud, c);
-          console.log(this.address)
-       } )
+          this.addMarker(c.latitud, c.longitud)
+          this.getAddress(c.latitud, c.longitud, c);
+        })
     }
-
- 
   }
 
   ngAfterViewInit(): void {
@@ -75,31 +69,48 @@ export class MapComponent implements OnInit {
 
     searchBox.addListener('places_changed', () => {
       const places = searchBox.getPlaces();
-      if (places.length === 0) {
+      if (places.length == 0) {
         return;
       }
+
+      // For each place, get the icon, name and location.
+      console.log(places[0].geometry.location.lat)
       const bounds = new google.maps.LatLngBounds();
-      console.log(bounds)
-      places.forEach(place => {
+
+      places.forEach((place) => {
         if (!place.geometry || !place.geometry.location) {
+          console.log("Returned place contains no geometry");
           return;
         }
+
+        const icon = {
+          url: place.icon as string,
+          size: new google.maps.Size(71, 71),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(17, 34),
+          scaledSize: new google.maps.Size(25, 25),
+        };
+
+        // Create a marker for each place.
+        this.markers.push(
+          new google.maps.Marker({
+            position: place.geometry.location,
+          })
+        );
+
+        console.log(place.geometry.location)
         if (place.geometry.viewport) {
-          bounds.union(place.geometry.viewport)
+          // Only geocodes have viewport.
+          bounds.union(place.geometry.viewport);
         } else {
           bounds.extend(place.geometry.location);
         }
       });
-      console.log(bounds);
-      let ne = bounds.getNorthEast(); // Coords of the northeast corner
-      let sw = bounds.getSouthWest(); // Coords of the southwest corner
-      let nw = new google.maps.LatLng(ne.lat(), sw.lng()); // Coords of the NW corner
-      let se = new google.maps.LatLng(sw.lat(), ne.lng()); // Coords of the SE corner
-      console.log(ne.toString(), sw.toString(), nw.toString(), se.toString());
       this.map.fitBounds(bounds);
-      console.log(bounds.getCenter());
-      console.log(this.map.data);
-    })
+      console.log(bounds.getCenter().lat())
+      console.log(bounds.getCenter().lng())
+
+    });
 
 
   };
@@ -113,8 +124,8 @@ export class MapComponent implements OnInit {
           console.log(results[0])
           this.address = results[0].formatted_address;
           if (colonia != null)
-          colonia.direccion = this.address.match(/[^,]+,[^,]+/g);
-          console.log( colonia.direccion );
+            colonia.direccion = this.address.match(/[^,]+,[^,]+/g);
+          console.log(colonia.direccion);
         } else {
           window.alert('No results found');
         }
@@ -125,38 +136,11 @@ export class MapComponent implements OnInit {
     });
   }
 
-  getBounds(markers: any) {
-    let north;
-    let south;
-    let east;
-    let west;
-
-    for (const marker of markers) {
-      // set the coordinates to marker's lat and lng on the first run.
-      // if the coordinates exist, get max or min depends on the coordinates.
-      north = north !== undefined ? Math.max(north, marker.position.lat) : marker.position.lat;
-      south = south !== undefined ? Math.min(south, marker.position.lat) : marker.position.lat;
-      east = east !== undefined ? Math.max(east, marker.position.lng) : marker.position.lng;
-      west = west !== undefined ? Math.min(west, marker.position.lng) : marker.position.lng;
-    };
-
-    const bounds = { north, south, east, west };
-
-    return bounds;
-  }
-
-
-
-  logCenter() {
-    console.log(JSON.stringify(this.map.getCenter()))
-  }
-
   addMarker(lat: number, long: number) {
     this.markers.push({
       position: {
         lat: lat,
-        lng: long,
-      }
+        lng: long}
     })
   }
 
