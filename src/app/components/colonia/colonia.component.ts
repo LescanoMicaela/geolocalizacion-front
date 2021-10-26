@@ -1,7 +1,8 @@
-import { Component, OnInit,Input, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ColoniaService } from 'src/app/services/colonia.service';
 import { Router } from '@angular/router';
 import { ColoniaModel } from 'src/app/model/colonia.model';
+import { TokenStorageService } from '@app/services/token-storage.service';
 
 
 @Component({
@@ -13,8 +14,9 @@ export class ColoniaComponent implements OnInit {
 
   colonias: ColoniaModel[] = [];
 
+
   constructor(
-    public service: ColoniaService,
+    public service: ColoniaService, private tokenStorageService: TokenStorageService,
     private router: Router) { }
 
   ngOnInit(): void {

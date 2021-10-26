@@ -15,8 +15,9 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { ColoniaFormComponent } from './components/colonia-form/colonia-form.component';
 import { AlimentacionComponent } from './components/alimentacion/alimentacion.component';
 import { LoginComponent } from './components/login/login.component';
-import { RegistroComponent } from './components/registro/registro.component';
-import { AlertComponent } from './components/alert/alert.component'
+import { RegisterComponent } from './components/register/register.component';
+
+import { authInterceptorProviders } from './_helpers/auth.interceptor';
 
 
 @NgModule({
@@ -29,9 +30,8 @@ import { AlertComponent } from './components/alert/alert.component'
     ColoniaComponent,
     ColoniaFormComponent,
     AlimentacionComponent,
-    LoginComponent,
-    RegistroComponent,
-    AlertComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +41,7 @@ import { AlertComponent } from './components/alert/alert.component'
     HttpClientModule,
     GoogleMapsModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
