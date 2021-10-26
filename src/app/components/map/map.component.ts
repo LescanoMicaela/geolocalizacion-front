@@ -40,20 +40,11 @@ export class MapComponent implements OnInit {
 
   ngOnInit(): void {
     navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position);
-      console.log(this.colonias);
       this.center = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       }
-
-      this.markers.push({
-        position: {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        }
-      })
-
+      this.addMarker(position.coords.latitude,position.coords.longitude )
     })
 
   }
@@ -62,24 +53,11 @@ export class MapComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     // only run when property "data" changed
     if (changes['colonias']) {
-      console.log(this.colonias);
       this.colonias.forEach(
         c => {
-          this.getAddress(c.latitud,c.longitud);
-          console.log(this.address);
-          this.markers.push({
-          position: {
-            lat: c.latitud,
-            lng: c.longitud,
-          },
-          label: {
-            color: 'red',
-            text: 'Marker label ' + this.address ,
-          },
-          title: 'Marker title ' + this.address,
-          info: 'Marker info ' + this.address
-        })
-    
+          this.addMarker(c.latitud,c.longitud)
+          this.getAddress(c.latitud,c.longitud, c);
+          console.log(this.address)
        } )
     }
 
@@ -127,14 +105,16 @@ export class MapComponent implements OnInit {
   };
 
 
-  getAddress(latitude: number, longitude: number) {
+  getAddress(latitude: number, longitude: number, colonia: ColoniaModel) {
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
       console.log(status);
       if (status === 'OK') {
         if (results[0]) {
-          this.zoom = 12;
-          this.address = results[0].formatted_address;
           console.log(results[0])
+          this.address = results[0].formatted_address;
+          if (colonia != null)
+          colonia.direccion = this.address.match(/[^,]+,[^,]+/g);
+          console.log( colonia.direccion );
         } else {
           window.alert('No results found');
         }
@@ -171,21 +151,12 @@ export class MapComponent implements OnInit {
     console.log(JSON.stringify(this.map.getCenter()))
   }
 
-  addMarker() {
+  addMarker(lat: number, long: number) {
     this.markers.push({
       position: {
-        lat: this.center.lat + ((Math.random() - 0.5) * 2) / 10,
-        lng: this.center.lng + ((Math.random() - 0.5) * 2) / 10,
-      },
-      label: {
-        color: 'red',
-        text: 'Marker label ' + (this.markers.length + 1),
-      },
-      title: 'Marker title ' + (this.markers.length + 1),
-      info: 'Marker info ' + (this.markers.length + 1),
-      options: {
-        animation: google.maps.Animation.BOUNCE,
-      },
+        lat: lat,
+        lng: long,
+      }
     })
   }
 
