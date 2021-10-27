@@ -1,6 +1,5 @@
 <div class="col-md-12">
   <div class="card card-container">
-    <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
     <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
       <div class="form-group">
         <label for="nombre">Nombre</label>
@@ -60,13 +59,14 @@
         </div>
       </div>
 
-      <div class="form-group form-check">
+      <div class="form-check">
         <input type="checkbox"  id="acreditacion" class="form-check-input" 
         name="acreditacion" [(ngModel)]="form.acreditacion" #acreditacion="ngModel"/>
-        <label for="acreditacion" class="form-check-label">Dispongo de acreditación de persona colaboradora /
+        <label  for="acreditacion" class="form-check-label small">Dispongo de acreditación de persona colaboradora /
           responsable de colonias felinas</label>
       </div>
-      <div class="form-group">
+      <div class="form-group  text-center">
+        <br>
         <button class="btn btn-primary btn-block">Registrarse</button>
       </div>
 

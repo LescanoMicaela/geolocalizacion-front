@@ -1,33 +1,67 @@
 <div class="col-md-12">
-  <div class="card card-container">
-    <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
-    <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-      <div class="form-group">
-        <label for="username">Email</label>
-        <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required
-          #username="ngModel" />
-        <div class="alert alert-danger" role="alert" *ngIf="f.submitted && username.invalid">
-          Debe introducir el email
+    <div class="card card-container">
+      <form
+        *ngIf="!isLoggedIn"
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+      >
+        <div class="form-group">
+          <label for="username">Email</label>
+          <input
+            type="text"
+            class="form-control"
+            name="username"
+            [(ngModel)]="form.username"
+            required
+            #username="ngModel"
+          />
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="f.submitted && username.invalid"
+          >
+            Debe introducir su email
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="password">Contraseña</label>
-        <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required
-          #password="ngModel" />
-        <div class="alert alert-danger" role="alert" *ngIf="f.submitted && password.invalid">
-          <div *ngIf="password.errors.required">Debe introducir su contraseña</div>
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            [(ngModel)]="form.password"
+            required
+            #password="ngModel"
+          />
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="f.submitted && password.invalid"
+          >
+            <div *ngIf="password.errors.required">Debe introducir su contraseña</div>
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary btn-block">
-          Login
-        </button>
-      </div>
-      <div class="form-group">
-        <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
-          El login ha fallado: {{ errorMessage }}
+        <div class="form-group text-center">
+          <br>
+          <button class="btn btn-primary btn-block">
+            Login
+          </button>
         </div>
+        <br>
+        <div class="form-group">
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="f.submitted && isLoginFailed">
+            Credenciales incorrectas
+          </div>
+        </div>
+      </form>
+  
+      <div class="alert alert-success" *ngIf="isLoggedIn">
+        Logged in as {{ roles }}.
       </div>
-    </form>
+    </div>
   </div>
-</div>

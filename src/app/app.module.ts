@@ -18,6 +18,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
     ColoniaFormComponent,
     AlimentacionComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

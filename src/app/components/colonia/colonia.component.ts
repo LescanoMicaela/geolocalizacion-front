@@ -14,6 +14,7 @@ export class ColoniaComponent implements OnInit {
 
   colonias: ColoniaModel[] = [];
 
+  currentUser: any = ''
 
   constructor(
     public service: ColoniaService, private tokenStorageService: TokenStorageService,

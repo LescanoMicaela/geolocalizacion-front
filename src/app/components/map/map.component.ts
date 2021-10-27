@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild, Input, SimpleChanges } from '@angular/core'
 import { GoogleMap } from '@angular/google-maps'
+import { Router } from '@angular/router';
 import { ColoniaModel } from 'src/app/model/colonia.model';
 
 @Component({
@@ -12,14 +13,17 @@ export class MapComponent implements OnInit {
   @ViewChild(GoogleMap)
   map: GoogleMap;
   @ViewChild('mapSearchField')
-  searchField!: ElementRef;
+  searchField: ElementRef;
 
   imageSrc = 'assets/images/cat-black-face.png'
   imageAlt = 'cat icon'
 
+  registrar: boolean = false;
+
   @Input()
   colonias: ColoniaModel[] = [];
 
+  direccionIntroducida: string = '';
   geoCoder = new google.maps.Geocoder;
   address: string = '';
   zoom: number = 20;
@@ -30,11 +34,18 @@ export class MapComponent implements OnInit {
     maxZoom: 20,
     minZoom: 8,
   }
+  nuevaLat: number;
+  nuevaLong: number;
   markers: any[] = [];
   infoContent = '';
 
+  loading = false;
+  router: string;
 
-  constructor() { }
+  constructor(private _router: Router) { 
+    this.router = _router.url; 
+
+  }
 
   ngOnInit(): void {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -50,24 +61,32 @@ export class MapComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     // only run when property "data" changed
     if (changes['colonias']) {
+      if (this.colonias != [])
+        var that = this;
       this.colonias.forEach(
-        c => {
-          this.addMarker(c.latitud, c.longitud)
-          this.getAddress(c.latitud, c.longitud, c);
+        (c, i, collection) => {
+          setTimeout(function () {
+            that.addMarker(c.latitud, c.longitud)
+            that.getAddress(c.latitud, c.longitud, c)
+          }, i * 900);
         })
+
     }
   }
+
+
 
   ngAfterViewInit(): void {
     const searchBox = new google.maps.places.SearchBox(
       this.searchField.nativeElement,
     );
+
     this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(
       this.searchField.nativeElement,
     );
 
 
-    searchBox.addListener('places_changed', () => {
+    searchBox.addListener('places_changed', (ev) => {
       const places = searchBox.getPlaces();
       if (places.length == 0) {
         return;
@@ -107,40 +126,50 @@ export class MapComponent implements OnInit {
         }
       });
       this.map.fitBounds(bounds);
-      console.log(bounds.getCenter().lat())
-      console.log(bounds.getCenter().lng())
-
+      this.nuevaLat = bounds.getCenter().lat();
+      this.nuevaLong = bounds.getCenter().lng();
+      this.addMarker(bounds.getCenter().lat(), bounds.getCenter().lng())
+      this.direccionIntroducida = this.searchField.nativeElement.value;
+      console.log(this.direccionIntroducida);
     });
+
 
 
   };
 
 
   getAddress(latitude: number, longitude: number, colonia: ColoniaModel) {
-    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
+    console.log("GET ADDRESS")
+    this.loading = true;
+    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, async (results, status) => {
       console.log(status);
       if (status === 'OK') {
         if (results[0]) {
           console.log(results[0])
           this.address = results[0].formatted_address;
-          if (colonia != null)
-            colonia.direccion = this.address.match(/[^,]+,[^,]+/g);
-          console.log(colonia.direccion);
+          if (colonia != null) colonia.direccion = this.address.match(/[^,]+,[^,]+/g);
         } else {
-          window.alert('No results found');
+          colonia.direccion = ["SIN DIRECCIÓN", "SIN NÚMERO"]
         }
-      } else {
-        window.alert('Geocoder failed due to: ' + status);
+      } else if (status === 'OVER_QUERY_LIMIT') {
+      }
+      else {
+        colonia.direccion = ["SIN DIRECCIÓN", "SIN NÚMERO"]
+        console.log('Geocoder failed due to: ' + status);
       }
 
     });
+    this.loading = false;
   }
+
+
 
   addMarker(lat: number, long: number) {
     this.markers.push({
       position: {
         lat: lat,
-        lng: long}
+        lng: long
+      }
     })
   }
 

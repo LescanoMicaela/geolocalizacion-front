@@ -4,6 +4,7 @@ import { ColoniaModel } from '../model/colonia.model';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { AlimentacionModel } from '../model/alimentacion.model';
+import { ColoniaRequestModel } from '@app/model/coloniaRequest.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class ColoniaService {
       );
   }
 
-  saveColonia(colonia: ColoniaModel): Observable<any> {
+  saveColonia(colonia: ColoniaRequestModel): Observable<any> {
     return this.http.post<ColoniaModel[]>(`${this.url}/colonia`, colonia)
       .pipe(
         catchError(this.handleError)

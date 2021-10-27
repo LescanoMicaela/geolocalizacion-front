@@ -1,1 +1,54 @@
-<p>alimentacion works!</p>
+<div>
+    <app-header></app-header>
+    <app-menu></app-menu>
+    <app-map [colonias]=colonias></app-map>
+
+    <div class="col-md-12 p-4">
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+            <p>La colonia tenía: </p>
+            <div class="form-check">
+                <input type="checkbox" id="agua" class="form-check-input" name="agua" [(ngModel)]="form.agua"
+                    #agua="ngModel" />
+                <label for="agua" class="form-check-label small">Agua</label>
+
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="comida" class="form-check-input" name="comida" [(ngModel)]="form.comida"
+                    #comida="ngModel" />
+                <label for="comida" class="form-check-label small">Comida</label>
+            </div>
+<br>
+            <p>Se ha proporcinado: </p>
+
+            <div class="form-check">
+                <input type="checkbox" id="agua2" class="form-check-input" name="agua2" [(ngModel)]="form.agua2"
+                    #comida2="ngModel" />
+                <label for="agua2" class="form-check-label small">Agua</label>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" id="comida2" class="form-check-input" name="comida2" [(ngModel)]="form.comida2"
+                    #comida2="ngModel" />
+                <label for="comida2" class="form-check-label small">Comida</label>
+            </div>
+
+            <div class="form-group text-center">
+                <br>
+                <button class="btn btn-primary btn-block">
+                    Guardar
+                </button>
+            </div>
+            <br>
+            <!--       <div class="form-group">
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="f.submitted && isLoginFailed">
+            Credenciales incorrectas
+          </div>
+        </div> -->
+        </form>
+
+    </div>
+
+</div>

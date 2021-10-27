@@ -13,3 +13,12 @@
   .my-map-search-field {
     border-color: #4d90fe;
   }
+
+  .direcciones {
+    overflow-y: scroll;
+    height: 20vh;
+  }
+
+  .direcciones img{
+    width: 1.5em;
+  }

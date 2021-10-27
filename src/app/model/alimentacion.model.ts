@@ -4,7 +4,6 @@ export class AlimentacionModel{
     agua: boolean;
     hayComida: boolean;
     comida: boolean;
-    fecha: Date;
 
 
     constructor( 
@@ -17,6 +16,5 @@ export class AlimentacionModel{
         this.agua=agua;
         this.hayComida = hayComida;
         this.comida=comida;
-        this.fecha=fecha;
     }
 }
