@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ColoniaService } from 'src/app/services/colonia.service';
 import { Router } from '@angular/router';
 import { ColoniaModel } from 'src/app/model/colonia.model';
@@ -14,13 +14,19 @@ export class ColoniaComponent implements OnInit {
 
   colonias: ColoniaModel[] = [];
 
+  isLoggedIn: boolean = false;
+
   currentUser: any = ''
 
   constructor(
-    public service: ColoniaService, private tokenStorageService: TokenStorageService,
+    public service: ColoniaService, private tokenStorage: TokenStorageService,
     private router: Router) { }
 
   ngOnInit(): void {
+
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+    }
     this.getColonias();
   }
 
