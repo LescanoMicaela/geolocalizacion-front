@@ -8,7 +8,7 @@
     <map-info-window>{{ infoContent }}</map-info-window>
   </google-map>
 
-  <div *ngIf="router === '/colonias'" class="direcciones">
+  <div *ngIf="router === '/colonias' && !loading" class="direcciones">
   <div  *ngFor=" let c of colonias;" class="d-flex flex-row bd-highlight mb-3" width="100%">
     <div class="p-2 bd-highlight"><img src="{{imageSrc}}" alt="{{imageAlt}}" /></div>
     <div *ngIf="c.direccion" class="p-2 bd-highlight">

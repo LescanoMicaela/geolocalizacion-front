@@ -42,8 +42,8 @@ export class MapComponent implements OnInit {
   loading = false;
   router: string;
 
-  constructor(private _router: Router) { 
-    this.router = _router.url; 
+  constructor(private _router: Router) {
+    this.router = _router.url;
 
   }
 
@@ -70,9 +70,14 @@ export class MapComponent implements OnInit {
             that.getAddress(c.latitud, c.longitud, c)
           }, i * 900);
         })
-
     }
+
   }
+
+
+
+
+
 
 
 

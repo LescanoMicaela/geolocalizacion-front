@@ -1,5 +1,4 @@
-<div>
-    <app-header></app-header>
+<div *ngIf="isLoggedIn">
     <app-menu></app-menu>
     <app-map [colonias]=colonias></app-map>
 
@@ -48,3 +47,5 @@
     </div>
 
 </div>
+
+<app-footer *ngIf="!isLoggedIn"></app-footer>

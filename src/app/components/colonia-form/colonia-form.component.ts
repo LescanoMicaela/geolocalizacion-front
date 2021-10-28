@@ -1,7 +1,8 @@
-import { Component, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ColoniaModel } from '@app/model/colonia.model';
 import { ColoniaRequestModel } from '@app/model/coloniaRequest.model';
 import { ColoniaService } from '@app/services/colonia.service';
+import { TokenStorageService } from '@app/services/token-storage.service';
 import { MapComponent } from '../map/map.component';
 
 @Component({
@@ -15,15 +16,19 @@ export class ColoniaFormComponent implements OnInit {
   colonias: ColoniaModel[] = [];
   colonia: ColoniaModel;
 
+  isLoggedIn: boolean = false;
 
   @ViewChild(MapComponent)
   map: MapComponent;
 
   registar = true;
 
-  constructor(public service: ColoniaService) { }
+  constructor(public service: ColoniaService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+    }
     /*   console.log(this.map.direccionIntroducida);
       console.log(this.map.nuevaLong);
       console.log(this.map.nuevaLong); */

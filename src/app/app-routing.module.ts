@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Input, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { RegisterComponent } from './components/register/register.component';
@@ -22,4 +22,9 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+
+    
+  @Input()
+  isLoggedIn: boolean = false;
+ }
