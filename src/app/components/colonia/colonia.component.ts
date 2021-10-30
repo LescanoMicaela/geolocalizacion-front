@@ -19,15 +19,16 @@ export class ColoniaComponent implements OnInit {
   currentUser: any = ''
 
   constructor(
-    public service: ColoniaService, private tokenStorage: TokenStorageService,
-    private router: Router) { }
+    public service: ColoniaService, private tokenStorage: TokenStorageService) { 
+
+    }
 
   ngOnInit(): void {
-
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
     }
     this.getColonias();
+    
   }
 
   getColonias(): void {

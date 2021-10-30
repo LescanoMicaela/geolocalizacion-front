@@ -8,7 +8,7 @@
     <map-info-window>{{ infoContent }}</map-info-window>
   </google-map>
 
-  <div *ngIf="(router === '/colonias' || router.includes('/alimentar') ) && !loading"  class="direcciones">
+  <div *ngIf="(router === '/colonias' || router.includes('/alimentar') ) && !loading"  class="direcciones p-2">
   <div [ngClass]="{'coloniaSelected' :  router.includes(c.id)}" *ngFor=" let c of colonias;" class="d-flex flex-row bd-highlight mb-3" width="100%">
     <div class="p-2 bd-highlight"><img src="{{imageSrc}}" alt="{{imageAlt}}" /></div>
     <div *ngIf="c.direccion" class="p-2 bd-highlight" [routerLink]="['/alimentar', c.id]">

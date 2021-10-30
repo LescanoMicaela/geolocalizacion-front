@@ -45,6 +45,8 @@ export class LoginComponent implements OnInit {
   }
 
   navigateToColonias(): void {
-    this.router.navigate(['/colonias']);
+    this.router.navigate(['/colonias']).then(() => {
+      window.location.reload();
+    });
   }
 }

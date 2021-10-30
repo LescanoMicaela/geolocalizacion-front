@@ -9,8 +9,6 @@ import { TokenStorageService } from './services/token-storage.service';
 export class AppComponent {
   private roles: string[];
   isLoggedIn = false;
-  showAdminBoard = false;
-  showModeratorBoard = false;
   username: string;
 
   constructor(private tokenStorageService: TokenStorageService) { }
@@ -21,11 +19,7 @@ export class AppComponent {
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
-
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
-
-      this.username = user.username;
+      this.username = user.nombre;
     }
   }
 
