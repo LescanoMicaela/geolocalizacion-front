@@ -27,6 +27,7 @@ export class MapComponent implements OnInit {
   geoCoder = new google.maps.Geocoder;
   address: string = '';
   zoom: number = 20;
+  @Input()
   center: any;
   options: google.maps.MapOptions = {
     disableDefaultUI: true,
@@ -39,15 +40,15 @@ export class MapComponent implements OnInit {
   markers: any[] = [];
   infoContent = '';
 
-  loading = false;
+  loading = true;
   router: string;
 
   constructor(private _router: Router) {
     this.router = _router.url;
-
-  }
+   }
 
   ngOnInit(): void {
+    this.loading = true;
     navigator.geolocation.getCurrentPosition((position) => {
       this.center = {
         lat: position.coords.latitude,
@@ -57,23 +58,35 @@ export class MapComponent implements OnInit {
     })
   }
 
-
-  ngOnChanges(changes: SimpleChanges) {
-    // only run when property "data" changed
-    if (changes['colonias']) {
-      if (this.colonias != [])
-        var that = this;
-      this.colonias.forEach(
-        (c, i, collection) => {
-          setTimeout(function () {
-            that.addMarker(c.latitud, c.longitud)
-            that.getAddress(c.latitud, c.longitud, c)
-          }, i * 900);
-        })
-    }
-
+  getSelected(id){
+    if (this.router.includes(id)){
+      return true;
+   }
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+
+    // only run when property "data" changed
+    if (changes['colonias']) {
+      if (this.colonias != []) {
+        var that = this;
+        this.colonias.forEach(
+          (c, i, collection) => {
+            setTimeout(function () {
+              that.addMarker(c.latitud, c.longitud)
+              that.getAddress(c.latitud, c.longitud, c)
+              if (i === (that.colonias.length - 1)) {
+                that.loading = false;
+              }
+            }, i * 900);
+             
+          })
+      }
+    }
+    if (changes['center']) {
+      this.center = this.center;
+    }
+  }
 
 
 
@@ -98,7 +111,6 @@ export class MapComponent implements OnInit {
       }
 
       // For each place, get the icon, name and location.
-      console.log(places[0].geometry.location.lat)
       const bounds = new google.maps.LatLngBounds();
 
       places.forEach((place) => {
@@ -122,7 +134,6 @@ export class MapComponent implements OnInit {
           })
         );
 
-        console.log(place.geometry.location)
         if (place.geometry.viewport) {
           // Only geocodes have viewport.
           bounds.union(place.geometry.viewport);
@@ -135,7 +146,6 @@ export class MapComponent implements OnInit {
       this.nuevaLong = bounds.getCenter().lng();
       this.addMarker(bounds.getCenter().lat(), bounds.getCenter().lng())
       this.direccionIntroducida = this.searchField.nativeElement.value;
-      console.log(this.direccionIntroducida);
     });
 
 
@@ -144,13 +154,9 @@ export class MapComponent implements OnInit {
 
 
   getAddress(latitude: number, longitude: number, colonia: ColoniaModel) {
-    console.log("GET ADDRESS")
-    this.loading = true;
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, async (results, status) => {
-      console.log(status);
       if (status === 'OK') {
         if (results[0]) {
-          console.log(results[0])
           this.address = results[0].formatted_address;
           if (colonia != null) colonia.direccion = this.address.match(/[^,]+,[^,]+/g);
         } else {
@@ -164,7 +170,6 @@ export class MapComponent implements OnInit {
       }
 
     });
-    this.loading = false;
   }
 
 

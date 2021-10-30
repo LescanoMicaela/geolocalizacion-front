@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'colonia', component: ColoniaFormComponent },
   { path: 'login', component: LoginComponent },
   { path: 'alimentar', component: AlimentacionComponent },
+  { path: 'alimentar/:id', component: AlimentacionComponent },
   { path: 'register', component: RegisterComponent },
   { path: '', redirectTo: 'colonias', pathMatch: 'full' }
 ];

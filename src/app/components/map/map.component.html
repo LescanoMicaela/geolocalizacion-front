@@ -8,13 +8,23 @@
     <map-info-window>{{ infoContent }}</map-info-window>
   </google-map>
 
-  <div *ngIf="router === '/colonias' && !loading" class="direcciones">
-  <div  *ngFor=" let c of colonias;" class="d-flex flex-row bd-highlight mb-3" width="100%">
+  <div *ngIf="(router === '/colonias' || router.includes('/alimentar') ) && !loading"  class="direcciones">
+  <div [ngClass]="{'coloniaSelected' :  router.includes(c.id)}" *ngFor=" let c of colonias;" class="d-flex flex-row bd-highlight mb-3" width="100%">
     <div class="p-2 bd-highlight"><img src="{{imageSrc}}" alt="{{imageAlt}}" /></div>
-    <div *ngIf="c.direccion" class="p-2 bd-highlight">
+    <div *ngIf="c.direccion" class="p-2 bd-highlight" [routerLink]="['/alimentar', c.id]">
       <p class="fw-bold">{{c.direccion[0]}}</p> 
       <p>{{c.direccion[1]}}</p>
     </div>
   </div>
+</div>
+
+<div *ngIf="loading" class="alert alert-info text-center mt-3 loading">
+  <h4 class="alert-heading">Cargando</h4>
+  <p>
+    <i class="fas fa-circle-notch fa-spin"></i>
+  </p>
+  <p class="mb-0">
+    Espere por favor
+  </p>
 </div>
 </div>

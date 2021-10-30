@@ -30,6 +30,13 @@ export class ColoniaService {
       );
   }
 
+  getColoniaById(id: number): Observable<any> {
+    return this.http.get<ColoniaModel>(`${this.url}/colonia/${id}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   saveColonia(colonia: ColoniaRequestModel): Observable<any> {
     return this.http.post<ColoniaModel[]>(`${this.url}/colonia`, colonia)
       .pipe(
@@ -46,7 +53,7 @@ export class ColoniaService {
   }
 
   saveAlimentacion(coloniaId:number, alimentacion: AlimentacionModel): Observable<any> {
-    return this.http.post<ColoniaModel[]>(`${this.url}/colonia${coloniaId}/alimentacion`, alimentacion)
+    return this.http.post<ColoniaModel[]>(`${this.url}/colonia/${coloniaId}/alimentacion`, alimentacion)
       .pipe(
         catchError(this.handleError)
       );

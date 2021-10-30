@@ -1,34 +1,34 @@
 <div  *ngIf="isLoggedIn">
     <app-menu></app-menu>
-    <app-map [colonias]=colonias></app-map>
+    <app-map [colonias]=colonias [center]=center></app-map>
 
     <div class="col-md-12 p-4">
         <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
             <p>La colonia tenía: </p>
             <div class="form-check">
-                <input type="checkbox" id="agua" class="form-check-input" name="agua" [(ngModel)]="form.agua"
+                <input type="checkbox" id="hayAgua" class="form-check-input" name="hayAgua" [(ngModel)]="form.hayAgua"
                     #agua="ngModel" />
-                <label for="agua" class="form-check-label small">Agua</label>
+                <label for="hayAgua" class="form-check-label small">Agua</label>
 
             </div>
             <div class="form-check">
-                <input type="checkbox" id="comida" class="form-check-input" name="comida" [(ngModel)]="form.comida"
+                <input type="checkbox" id="hayComida" class="form-check-input" name="hayComida" [(ngModel)]="form.hayComida"
                     #comida="ngModel" />
-                <label for="comida" class="form-check-label small">Comida</label>
+                <label for="hayComida" class="form-check-label small">Comida</label>
             </div>
 <br>
             <p>Se ha proporcinado: </p>
 
             <div class="form-check">
-                <input type="checkbox" id="agua2" class="form-check-input" name="agua2" [(ngModel)]="form.agua2"
+                <input type="checkbox" id="agua" class="form-check-input" name="agua" [(ngModel)]="form.agua"
                     #comida2="ngModel" />
-                <label for="agua2" class="form-check-label small">Agua</label>
+                <label for="agua" class="form-check-label small">Agua</label>
             </div>
 
             <div class="form-check">
-                <input type="checkbox" id="comida2" class="form-check-input" name="comida2" [(ngModel)]="form.comida2"
+                <input type="checkbox" id="comida" class="form-check-input" name="comida" [(ngModel)]="form.comida"
                     #comida2="ngModel" />
-                <label for="comida2" class="form-check-label small">Comida</label>
+                <label for="comida" class="form-check-label small">Comida</label>
             </div>
 
             <div class="form-group text-center">
