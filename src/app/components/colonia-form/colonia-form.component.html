@@ -2,10 +2,16 @@
     <app-menu></app-menu>
     <app-map [colonias]=colonias ></app-map>
 
-    <div class="col-md-12 p-4">
+    <div *ngIf="!this.map || this.map.direccionIntroducida===''" class="alert alert-warning text-center p-2 mt-3">
+        <p class="alert-heading">Para registrar una colonia introduzca la dirección en el buscador</p>
+        <p>
+            <i class="fa fa-exclamation fa-1x"></i>
+        </p>
+    </div>
+    <div *ngIf="this.map && this.map.direccionIntroducida!='' " class="col-md-12 p-2">
         <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
             <div class="form-group">
-                <label for="direccion">Direccion - </label>
+                <label for="direccion">Direccion  </label>
                 <input disabled type="text" class="form-control" name="direccion"
                     [ngModel]="this.map && this.map.direccionIntroducida"
                     (ngModelChange)="this.map.direccionIntroducida=$event" required #direccion="ngModel" />
