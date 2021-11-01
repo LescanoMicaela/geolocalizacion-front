@@ -1,7 +1,7 @@
 <div id="app" class="cover-container">
     <div class="flex-fill">
-    <nav class="navbar navbar-expand navbar-primary flex-row-reverse">
-        <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+    <nav  *ngIf="!isLoggedIn" class="navbar navbar-expand navbar-primary flex-row-reverse">
+        <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
             </li>
@@ -9,15 +9,18 @@
                 <a href="/login" class="nav-link" routerLink="login">Login</a>
             </li>
         </ul>
+    </nav>
 
-        <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
-<!--             <li class="nav-item">
-                <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
-            </li> -->
+    <nav *ngIf="isLoggedIn" class="navbar navbar-expand-lg flex-row-reverse p-2">
+      
+        <ul class="navbar-nav mr-auto" >
             <li class="nav-item">
                 <a href class="nav-link" (click)="logout()">LogOut</a>
             </li>
         </ul>
+        <span class="navbar-text">
+            Bienvenido/a {{ username }}
+          </span>
     </nav>
     <router-outlet></router-outlet>
 </div>
