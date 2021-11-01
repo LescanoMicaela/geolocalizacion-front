@@ -45,8 +45,6 @@ export class AlimentacionComponent implements OnInit {
     }
   }
 
-
-
   onSubmit(): void {
     console.log(this.form)
     this.saveAlimentacion(this.form, this.id);
@@ -80,7 +78,7 @@ export class AlimentacionComponent implements OnInit {
   waitForElement(selector) {
     let element = document.getElementById(selector);
     if (element) {
-      scroll(selector);
+      document.getElementById(selector).scrollIntoView();
       return;
     }
     let observer = new MutationObserver(mutations => {
