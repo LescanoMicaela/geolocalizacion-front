@@ -43,19 +43,19 @@ export class MapComponent implements OnInit {
 
   loading = true;
   router: string;
-  coloniaSelected : number;
+  coloniaSelected: number;
 
-  constructor(public _router: Router,   private route: ActivatedRoute) {
+  constructor(public _router: Router, private route: ActivatedRoute) {
     this.router = _router.url;
     this._router = _router;
-   }
+  }
 
   ngOnInit(): void {
     this.loading = true;
     //to update class on selected
     this.route.params.subscribe(routeParams => {
       routeParams.id ? this.coloniaSelected = routeParams.id : null;
-    });    
+    });
     navigator.geolocation.getCurrentPosition((position) => {
       this.center = {
         lat: position.coords.latitude,
@@ -80,7 +80,7 @@ export class MapComponent implements OnInit {
                 that.loading = false;
               }
             }, i * 900);
-             
+
           })
       }
     }
@@ -91,60 +91,61 @@ export class MapComponent implements OnInit {
 
 
   ngAfterViewInit(): void {
-    const searchBox = new google.maps.places.SearchBox(
-      this.searchField.nativeElement,
-    );
+    if (this.searchField) {
+      const searchBox = new google.maps.places.SearchBox(
+        this.searchField.nativeElement,
+      );
 
-    this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(
-      this.searchField.nativeElement,
-    );
+      this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(
+        this.searchField.nativeElement,
+      );
 
 
-    searchBox.addListener('places_changed', (ev) => {
-      const places = searchBox.getPlaces();
-      if (places.length == 0) {
-        return;
-      }
-
-      // For each place, get the icon, name and location.
-      const bounds = new google.maps.LatLngBounds();
-
-      places.forEach((place) => {
-        if (!place.geometry || !place.geometry.location) {
-          console.log("Returned place contains no geometry");
+      searchBox.addListener('places_changed', (ev) => {
+        const places = searchBox.getPlaces();
+        if (places.length == 0) {
           return;
         }
 
-        const icon = {
-          url: place.icon as string,
-          size: new google.maps.Size(71, 71),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(17, 34),
-          scaledSize: new google.maps.Size(25, 25),
-        };
+        // For each place, get the icon, name and location.
+        const bounds = new google.maps.LatLngBounds();
 
-        // Create a marker for each place.
-        this.markers.push(
-          new google.maps.Marker({
-            position: place.geometry.location,
-          })
-        );
+        places.forEach((place) => {
+          if (!place.geometry || !place.geometry.location) {
+            console.log("Returned place contains no geometry");
+            return;
+          }
 
-        if (place.geometry.viewport) {
-          // Only geocodes have viewport.
-          bounds.union(place.geometry.viewport);
-        } else {
-          bounds.extend(place.geometry.location);
-        }
+          const icon = {
+            url: place.icon as string,
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(25, 25),
+          };
+
+          // Create a marker for each place.
+          this.markers.push(
+            new google.maps.Marker({
+              position: place.geometry.location,
+            })
+          );
+
+          if (place.geometry.viewport) {
+            // Only geocodes have viewport.
+            bounds.union(place.geometry.viewport);
+          } else {
+            bounds.extend(place.geometry.location);
+          }
+        });
+        this.map.fitBounds(bounds);
+        this.nuevaLat = bounds.getCenter().lat();
+        this.nuevaLong = bounds.getCenter().lng();
+        this.addMarker(bounds.getCenter().lat(), bounds.getCenter().lng())
+        this.direccionIntroducida = this.searchField.nativeElement.value;
       });
-      this.map.fitBounds(bounds);
-      this.nuevaLat = bounds.getCenter().lat();
-      this.nuevaLong = bounds.getCenter().lng();
-      this.addMarker(bounds.getCenter().lat(), bounds.getCenter().lng())
-      this.direccionIntroducida = this.searchField.nativeElement.value;
-    });
 
-
+    }
 
   };
 
@@ -179,7 +180,7 @@ export class MapComponent implements OnInit {
     })
   }
 
-  scroll(id : number){
+  scroll(id: number) {
     document.getElementById(id + '').scrollIntoView();
   }
 

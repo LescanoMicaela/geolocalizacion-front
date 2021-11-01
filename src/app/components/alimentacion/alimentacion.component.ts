@@ -60,6 +60,7 @@ export class AlimentacionComponent implements OnInit {
 
   }
   saveAlimentacion(alimentacion: any, coloniaId: number): void {
+    console.log(coloniaId)
     this.service.saveAlimentacion(coloniaId, alimentacion).subscribe((resp: any) => {
       console.log(alimentacion);
       Swal.fire({
