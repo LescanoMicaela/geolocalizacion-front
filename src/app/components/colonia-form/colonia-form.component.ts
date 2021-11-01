@@ -65,7 +65,7 @@ export class ColoniaFormComponent implements OnInit {
       console.log(this.colonia);
       Swal.fire({
         title: 'Colonia registrada',
-        text: 'Se ha guardado la colonia correctamente',
+        text:  'Se han guardado los datos correctamente',  
         icon: 'success'
       })
 

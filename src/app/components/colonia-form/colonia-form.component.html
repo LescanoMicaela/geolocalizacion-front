@@ -24,7 +24,7 @@
                 <input type="gatos" class="form-control" name="gatos" [(ngModel)]="form.gatos" required
                     #gatos="ngModel" />
                 <div class="alert alert-danger" role="alert" *ngIf="f.submitted && gatos.invalid">
-                    <div *ngIf="gatos.errors.required">Debe un número aproximado de gatos</div>
+                    <div *ngIf="gatos.errors.required">Debe introducir un número aproximado de gatos</div>
                 </div>
             </div>
 

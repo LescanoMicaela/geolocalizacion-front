@@ -3,9 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ColoniaModel } from '@app/model/colonia.model';
 import { ColoniaService } from '@app/services/colonia.service';
 import { TokenStorageService } from '@app/services/token-storage.service';
-import { fromEvent, Observable, of, timer } from 'rxjs';
-import { switchMap, retryWhen, delay } from 'rxjs/operators';
-import { MapComponent } from '../map/map.component';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-alimentacion',
@@ -64,6 +62,11 @@ export class AlimentacionComponent implements OnInit {
   saveAlimentacion(alimentacion: any, coloniaId: number): void {
     this.service.saveAlimentacion(coloniaId, alimentacion).subscribe((resp: any) => {
       console.log(alimentacion);
+      Swal.fire({
+        title: 'Colonia alimentada',
+        text:  'Se han guardado los datos correctamente',  
+        icon: 'success'
+      })
     });
   }
 

@@ -70,7 +70,7 @@ export class ColoniaService {
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
         let errorMessage ='';
-        error.error.error === 'Unauthorized' ? errorMessage = 'usuario no autenticado o token expirado' : errorMessage = error.error.mensaje;
+        error.error.error === 'Unauthorized' ? errorMessage = 'Usuario no autenticado o token expirado' : errorMessage = error.error.mensaje;
         Swal.fire({  
           icon: 'error',  
           title: 'Error',  

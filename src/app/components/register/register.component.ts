@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '@app/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MapComponent } from '../map/map.component';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 
 @Component({
@@ -28,17 +28,22 @@ export class RegisterComponent implements OnInit {
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
-        setTimeout(() => {
-          this.router.navigate(['/login']);
-        },
-          5000);
+        Swal.fire({  
+          icon: 'success',  
+          title: 'Usuario/a registrado/a',  
+          text:  'Se han guardado los datos correctamente',  
+        }) 
       },
       err => {
         console.log(err.error.mensaje)
         this.errorMessage = err.error.mensaje;
         this.isSignUpFailed = true;
-      }
-    );
+        Swal.fire({
+          title: 'Error',
+          text:  this.errorMessage,  
+          icon: 'error'
+        })
+      });
   }
 
 
