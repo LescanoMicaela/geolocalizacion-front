@@ -5,6 +5,8 @@ import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { AlimentacionModel } from '../model/alimentacion.model';
 import { ColoniaRequestModel } from '@app/model/coloniaRequest.model';
+import Swal from 'sweetalert2/dist/sweetalert2.js';  
+
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +69,13 @@ export class ColoniaService {
       console.error(
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
+        let errorMessage ='';
+        error.error.error === 'Unauthorized' ? errorMessage = 'usuario no autenticado o token expirado' : errorMessage = error.error.mensaje;
+        Swal.fire({  
+          icon: 'error',  
+          title: 'Error',  
+          text:  errorMessage,  
+        })  
     }
     return throwError(
       'Something bad happened; please try again later.');

@@ -16,7 +16,7 @@ export class ColoniaModel{
         longitud:number,latitud:number, direccion: string[]){
         this.id = id;
         this.numGatos=numGatos;
-        this.registro = true;
+        this.registro = registro;
         this.longitud=longitud;
         this.latitud=latitud;
         this.direccion=direccion;

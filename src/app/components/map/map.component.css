@@ -30,6 +30,11 @@
 
   }
 
+.notSelected{
+  background-color: white;
+  box-shadow: none;
+}
+
   .loading{
     height: 20vh;
   }

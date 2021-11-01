@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '@app/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MapComponent } from '../map/map.component';
 
 
 @Component({
@@ -14,6 +15,7 @@ export class RegisterComponent implements OnInit {
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
+
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -38,5 +40,6 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
+
 
 }

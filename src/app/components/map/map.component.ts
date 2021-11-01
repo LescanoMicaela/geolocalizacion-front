@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild, Input, SimpleChanges } from '@angular/core'
 import { GoogleMap } from '@angular/google-maps'
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { ColoniaModel } from 'src/app/model/colonia.model';
 
 @Component({
@@ -42,13 +43,19 @@ export class MapComponent implements OnInit {
 
   loading = true;
   router: string;
+  coloniaSelected : number;
 
-  constructor(private _router: Router) {
+  constructor(public _router: Router,   private route: ActivatedRoute) {
     this.router = _router.url;
+    this._router = _router;
    }
 
   ngOnInit(): void {
     this.loading = true;
+    //to update class on selected
+    this.route.params.subscribe(routeParams => {
+      routeParams.id ? this.coloniaSelected = routeParams.id : null;
+    });    
     navigator.geolocation.getCurrentPosition((position) => {
       this.center = {
         lat: position.coords.latitude,
@@ -58,14 +65,8 @@ export class MapComponent implements OnInit {
     })
   }
 
-  getSelected(id){
-    if (this.router.includes(id)){
-      return true;
-   }
-  }
 
   ngOnChanges(changes: SimpleChanges) {
-
     // only run when property "data" changed
     if (changes['colonias']) {
       if (this.colonias != []) {
@@ -87,11 +88,6 @@ export class MapComponent implements OnInit {
       this.center = this.center;
     }
   }
-
-
-
-
-
 
 
   ngAfterViewInit(): void {
@@ -183,5 +179,8 @@ export class MapComponent implements OnInit {
     })
   }
 
+  scroll(id : number){
+    document.getElementById(id + '').scrollIntoView();
+  }
 
 }

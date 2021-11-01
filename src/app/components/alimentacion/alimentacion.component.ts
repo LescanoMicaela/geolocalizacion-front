@@ -1,8 +1,11 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ColoniaModel } from '@app/model/colonia.model';
 import { ColoniaService } from '@app/services/colonia.service';
 import { TokenStorageService } from '@app/services/token-storage.service';
+import { fromEvent, Observable, of, timer } from 'rxjs';
+import { switchMap, retryWhen, delay } from 'rxjs/operators';
+import { MapComponent } from '../map/map.component';
 
 @Component({
   selector: 'app-alimentacion',
@@ -18,43 +21,45 @@ export class AlimentacionComponent implements OnInit {
   id: number;
 
   isLoggedIn: boolean = false;
+  private contentPlaceholder: ElementRef;
+
 
   colonias: ColoniaModel[] = [];
   constructor(public service: ColoniaService, private tokenStorage: TokenStorageService,
     private route: ActivatedRoute, private router: Router) {
     this.service = service;
+
+
   }
 
   ngOnInit(): void {
 
- this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-
-
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.route.params.subscribe(routeParams => {
-        routeParams.id ?  ( this.id = routeParams.id,   this.getColonia(routeParams.id)) : null;
+        routeParams.id ? (this.id = routeParams.id, this.getColonia(routeParams.id)) : null;
+        this.waitForElement(this.id+'');
+
       });
-  
       this.getColonias();
     }
+  }
 
 
- }
 
   onSubmit(): void {
     console.log(this.form)
-    this.saveAlimentacion(this.form,this.id);
+    this.saveAlimentacion(this.form, this.id);
   }
 
-  getColonia(id: number){
+  getColonia(id: number) {
     this.service.getColoniaById(id).subscribe((resp: any) => {
       console.log(resp);
       this.center = {
         lat: resp.latitud,
         lng: resp.longitud
       }
-      console.log("THIS CENTER:   " +this.center);
+
     });
 
   }
@@ -70,4 +75,31 @@ export class AlimentacionComponent implements OnInit {
       console.log(this.colonias);
     });
   }
+
+  //scroll al element seleccionado
+  waitForElement(selector) {
+    let element = document.getElementById(selector);
+    if (element) {
+      scroll(selector);
+      return;
+    }
+    let observer = new MutationObserver(mutations => {
+      mutations.forEach(function(mutation) {
+        let nodes = Array.from(mutation.addedNodes);
+        for (var node of nodes) {
+          if (node.contains(document.getElementById(selector))) {
+            document.getElementById(selector).scrollIntoView();
+            observer.disconnect();
+            return;
+          }
+        }
+      });
+    });
+    observer.observe(document.documentElement, {
+      childList: true,
+      subtree: true
+    });
+  }
+
+
 }

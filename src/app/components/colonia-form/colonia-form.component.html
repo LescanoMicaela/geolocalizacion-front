@@ -1,12 +1,12 @@
 <div *ngIf="isLoggedIn">
     <app-menu></app-menu>
-    <app-map [colonias]=colonias></app-map>
+    <app-map [colonias]=colonias ></app-map>
 
     <div class="col-md-12 p-4">
         <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
             <div class="form-group">
                 <label for="direccion">Direccion - </label>
-                <input type="text" class="form-control" name="direccion"
+                <input disabled type="text" class="form-control" name="direccion"
                     [ngModel]="this.map && this.map.direccionIntroducida"
                     (ngModelChange)="this.map.direccionIntroducida=$event" required #direccion="ngModel" />
                 <div class="alert alert-danger" role="alert" *ngIf="f.submitted && direccion.invalid">
