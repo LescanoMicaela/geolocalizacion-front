@@ -49,8 +49,8 @@ export class FeedingnComponent implements OnInit {
     this.service.getColonyById(id).subscribe((resp: any) => {
       console.log(resp);
       this.center = {
-        lat: resp.latitud,
-        lng: resp.longitud
+        lat: resp.lat,
+        lng: resp.lng
       }
 
     });
