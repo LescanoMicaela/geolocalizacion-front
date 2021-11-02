@@ -2,38 +2,38 @@
   <div class="card card-container">
     <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
       <div class="form-group">
-        <label for="nombre">Nombre</label>
-        <input type="text" class="form-control" name="nombre" [(ngModel)]="form.nombre" required minlength="3"
-          maxlength="20" #nombre="ngModel" />
-        <div class="alert-danger" *ngIf="f.submitted && nombre.invalid">
-          <div *ngIf="nombre.errors.required">El nombre es obligatorio</div>
-          <div *ngIf="nombre.errors.minlength">
-            El nombre debe contener al menos 3 carácteres
+        <label for="name">Nombre</label>
+        <input type="text" class="form-control" name="name" [(ngModel)]="form.name" required minlength="3"
+          maxlength="20" #name="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && name.invalid">
+          <div *ngIf="name.errors.required">El nombre es obligatorio</div>
+          <div *ngIf="name.errors.minlength">
+            El name debe contener al menos 3 carácteres
           </div>
-          <div *ngIf="nombre.errors.maxlength">
+          <div *ngIf="name.errors.maxlength">
             El nombre debe contener 20 carácteres como máximo
           </div>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="apellido">Primer apellido</label>
-        <input type="text" class="form-control" name="apellido" [(ngModel)]="form.apellido" required minlength="3"
-          maxlength="20" #apellido="ngModel" />
-        <div class="alert-danger" *ngIf="f.submitted && apellido.invalid">
-          <div *ngIf="apellido.errors.required">El primer appellido es obligatorio</div>
-          <div *ngIf="apellido.errors.minlength">
+        <label for="surname">Primer apellido</label>
+        <input type="text" class="form-control" name="surname" [(ngModel)]="form.surname" required minlength="3"
+          maxlength="20" #surname="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && surname.invalid">
+          <div *ngIf="surname.errors.required">El primer apellido es obligatorio</div>
+          <div *ngIf="surname.errors.minlength">
             El apellido debe contener al menos 3 carácteres
           </div>
-          <div *ngIf="apellido.errors.maxlength">
+          <div *ngIf="surname.errors.maxlength">
             El apellido debe contener 20 carácteres como máximo
           </div>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="apellido2">Segundo apellido</label>
-        <input type="text" class="form-control" name="apellido2" [(ngModel)]="form.apellido2" #apellido2="ngModel" />
+        <label for="surname2">Segundo apellido</label>
+        <input type="text" class="form-control" name="surname2" [(ngModel)]="form.surname2" #surname2="ngModel" />
       </div>
 
       <div class="form-group">
@@ -60,32 +60,27 @@
       </div>
 
       <div class="form-group">
-        <label for="passwordValidar">Repita su contraseña</label>
-        <input type="password" class="form-control" name="passwordValidar" [(ngModel)]="form.passwordValidar" required minlength="6"
-          #passwordValidar="ngModel" />
-        <div class="alert-danger" *ngIf="f.submitted && (passwordValidar.invalid || passwordValidar != form.password) ">
-          <div *ngIf="passwordValidar.errors && passwordValidar.errors.required">La validación de contraseña es obligatoria</div>
-          <div *ngIf="passwordValidar != form.password">
+        <label for="passwordValidate">Repita su contraseña</label>
+        <input type="password" class="form-control" name="passwordValidate" [(ngModel)]="form.passwordValidate" required minlength="6"
+          #passwordValidate="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && (passwordValidate.invalid || passwordValidate != form.password) ">
+          <div *ngIf="passwordValidate.errors && passwordValidate.errors.required">La validación de contraseña es obligatoria</div>
+          <div *ngIf="passwordValidate != form.password">
             La contraseña debe coincidir
           </div>
         </div>
       </div>
 
       <div class="form-check">
-        <input type="checkbox"  id="acreditacion" class="form-check-input" 
-        name="acreditacion" [(ngModel)]="form.acreditacion" #acreditacion="ngModel"/>
-        <label  for="acreditacion" class="form-check-label small">Dispongo de acreditación de persona colaboradora /
+        <input type="checkbox"  id="registration" class="form-check-input" 
+        name="registration" [(ngModel)]="form.registration" #registration="ngModel"/>
+        <label  for="registration" class="form-check-label small">Dispongo de acreditación de persona colaboradora /
           responsable de colonias felinas</label>
       </div>
       <div class="form-group  text-center">
         <br>
         <button class="btn btn-primary btn-block">Registrarse</button>
       </div>
-
-<!--       <div class="alert alert-warning text-center" *ngIf="f.submitted && isSignUpFailed">
-        El registro ha fallado.<br/>
-        {{ errorMessage }}
-      </div> -->
     </form>
 
     <div class="alert alert-success" *ngIf="isSuccessful">

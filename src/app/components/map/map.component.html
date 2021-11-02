@@ -1,7 +1,7 @@
 <div>
   <input 
   *ngIf="!router.includes('/alimentar')"
-  [(ngModel)]="direccionIntroducida" #mapSearchField class="my-map-search-field" type="text" placeholder="Buscar" />
+  [(ngModel)]="enteredDirection" #mapSearchField class="my-map-search-field" type="text" placeholder="Buscar" />
   <google-map width="100%" height="35vh" [center]="center" [options]="options">
     <map-marker #markerElem *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
       [title]="marker.title" [options]="marker.options">
@@ -10,12 +10,12 @@
     <map-info-window>{{ infoContent }}</map-info-window>
   </google-map>
 
-  <div #direcciones *ngIf="(router === '/colonias' || router.includes('/alimentar') ) && !loading" id="direccion" class="direcciones p-2">
-  <div [ngClass]="{'coloniaSelected' : coloniaSelected == c.id}" *ngFor=" let c of colonias;" class="d-flex flex-row bd-highlight mb-3" id="{{c.id}}" width="100%" >
+  <div #directions *ngIf="(router === '/colonias' || router.includes('/alimentar') ) && !loading" id="direction" class="directions p-2">
+  <div [ngClass]="{'colonySelected' : colonySelected == c.id}" *ngFor=" let c of colonies;" class="d-flex flex-row bd-highlight mb-3" id="{{c.id}}" width="100%" >
     <div class="p-2 bd-highlight"><img src="{{imageSrc}}" alt="{{imageAlt}}" /></div>
-    <div *ngIf="c.direccion" class="p-2 bd-highlight" (click)="scroll(c.id)" [routerLink]="['/alimentar', c.id]">
-      <p class="fw-bold">{{c.direccion[0]}}</p> 
-      <p>{{c.direccion[1]}}</p>
+    <div *ngIf="c.direction" class="p-2 bd-highlight" (click)="scroll(c.id)" [routerLink]="['/alimentar', c.id]">
+      <p class="fw-bold">{{c.direction[0]}}</p> 
+      <p>{{c.direction[1]}}</p>
     </div>
   </div>
 </div>

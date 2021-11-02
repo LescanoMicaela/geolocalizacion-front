@@ -1,8 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild, Input, SimpleChanges } from '@angular/core'
 import { GoogleMap } from '@angular/google-maps'
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { ColoniaModel } from 'src/app/model/colonia.model';
+import { ColonyModel } from 'src/app/model/colony.model';
 
 @Component({
   selector: 'app-map',
@@ -22,9 +21,9 @@ export class MapComponent implements OnInit {
   registrar: boolean = false;
 
   @Input()
-  colonias: ColoniaModel[] = [];
+  colonies: ColonyModel[] = [];
 
-  direccionIntroducida: string = '';
+  enteredDirection: string = '';
   geoCoder = new google.maps.Geocoder;
   address: string = '';
   zoom: number = 20;
@@ -36,14 +35,14 @@ export class MapComponent implements OnInit {
     maxZoom: 20,
     minZoom: 8,
   }
-  nuevaLat: number;
-  nuevaLong: number;
+  newLat: number;
+  newLng: number;
   markers: any[] = [];
   infoContent = '';
 
   loading = true;
   router: string;
-  coloniaSelected: number;
+  colonySelected: number;
 
   constructor(public _router: Router, private route: ActivatedRoute) {
     this.router = _router.url;
@@ -54,7 +53,7 @@ export class MapComponent implements OnInit {
     this.loading = true;
     //to update class on selected
     this.route.params.subscribe(routeParams => {
-      routeParams.id ? this.coloniaSelected = routeParams.id : null;
+      routeParams.id ? this.colonySelected = routeParams.id : null;
     });
     navigator.geolocation.getCurrentPosition((position) => {
       this.center = {
@@ -68,19 +67,18 @@ export class MapComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     // only run when property "data" changed
-    if (changes['colonias']) {
-      if (this.colonias != []) {
+    if (changes['colonies']) {
+      if (this.colonies != []) {
         var that = this;
-        this.colonias.forEach(
+        this.colonies.forEach(
           (c, i, collection) => {
             setTimeout(function () {
-              that.addMarker(c.latitud, c.longitud)
-              that.getAddress(c.latitud, c.longitud, c)
-              if (i === (that.colonias.length - 1)) {
+              that.addMarker(c.lat, c.lng)
+              that.getAddress(c.lat, c.lng, c)
+              if (i === (that.colonies.length - 1)) {
                 that.loading = false;
               }
             }, i * 900);
-
           })
       }
     }
@@ -99,7 +97,6 @@ export class MapComponent implements OnInit {
       this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(
         this.searchField.nativeElement,
       );
-
 
       searchBox.addListener('places_changed', (ev) => {
         const places = searchBox.getPlaces();
@@ -139,10 +136,10 @@ export class MapComponent implements OnInit {
           }
         });
         this.map.fitBounds(bounds);
-        this.nuevaLat = bounds.getCenter().lat();
-        this.nuevaLong = bounds.getCenter().lng();
+        this.newLat = bounds.getCenter().lat();
+        this.newLng = bounds.getCenter().lng();
         this.addMarker(bounds.getCenter().lat(), bounds.getCenter().lng())
-        this.direccionIntroducida = this.searchField.nativeElement.value;
+        this.enteredDirection = this.searchField.nativeElement.value;
       });
 
     }
@@ -150,32 +147,31 @@ export class MapComponent implements OnInit {
   };
 
 
-  getAddress(latitude: number, longitude: number, colonia: ColoniaModel) {
-    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, async (results, status) => {
+  getAddress(lat: number, lng: number, colony: ColonyModel) {
+    this.geoCoder.geocode({ 'location': { lat: lat, lng: lng } }, async (results, status) => {
       if (status === 'OK') {
         if (results[0]) {
           this.address = results[0].formatted_address;
-          if (colonia != null) colonia.direccion = this.address.match(/[^,]+,[^,]+/g);
+          if (colony != null) colony.direction = this.address.match(/[^,]+,[^,]+/g);
         } else {
-          colonia.direccion = ["SIN DIRECCIÓN", "SIN NÚMERO"]
+          colony.direction = ["SIN DIRECCIÓN", "SIN NÚMERO"]
         }
       } else if (status === 'OVER_QUERY_LIMIT') {
       }
       else {
-        colonia.direccion = ["SIN DIRECCIÓN", "SIN NÚMERO"]
+        colony.direction = ["SIN DIRECCIÓN", "SIN NÚMERO"]
         console.log('Geocoder failed due to: ' + status);
       }
-
     });
   }
 
 
 
-  addMarker(lat: number, long: number) {
+  addMarker(lat: number, lng: number) {
     this.markers.push({
       position: {
         lat: lat,
-        lng: long
+        lng: lng
       }
     })
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@app/services/auth.service';
 import { TokenStorageService } from '@app/services/token-storage.service';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
-        this.navigateToColonias();
+        this.navigateToColonies();
       },
       err => {
         this.errorMessage = err.error.message;
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  navigateToColonias(): void {
+  navigateToColonies(): void {
     this.router.navigate(['/colonias']).then(() => {
       window.location.reload();
     });

@@ -9,10 +9,10 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { MapComponent } from './components/map/map.component';
 import { AddressComponent } from './components/address/address.component';
-import { ColoniaComponent } from './components/colonia/colonia.component';
+import { ColonyComponent } from './components/colony/colony.component';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { ColoniaFormComponent } from './components/colonia-form/colonia-form.component';
-import { AlimentacionComponent } from './components/alimentacion/alimentacion.component';
+import { ColonyFormComponent } from './components/colony-form/colony-form.component';
+import { FeedingnComponent } from './components/feeding/feeding.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 
@@ -26,9 +26,9 @@ import { FooterComponent } from './components/footer/footer.component';
     MenuComponent,
     MapComponent,
     AddressComponent,
-    ColoniaComponent,
-    ColoniaFormComponent,
-    AlimentacionComponent,
+    ColonyComponent,
+    ColonyFormComponent,
+    FeedingnComponent,
     RegisterComponent,
     LoginComponent,
     FooterComponent

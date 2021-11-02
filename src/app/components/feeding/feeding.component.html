@@ -1,6 +1,6 @@
 <div *ngIf="isLoggedIn">
     <app-menu></app-menu>
-    <app-map [colonias]=colonias [center]=center></app-map>
+    <app-map [colonies]=colonies [center]=center></app-map>
 
     <div *ngIf="!this.id" class="alert alert-warning text-center mt-2 p-1">
         <h6 class="alert-heading">Debe seleccionar una colonia o en caso de que no exista registrarla <a href="/colonia">aquí</a></h6>
@@ -15,30 +15,30 @@
             <div class="formPart">
                 <p>La colonia tenía: </p>
                 <div class="form-check">
-                    <input type="checkbox" id="hayAgua" class="form-check-input" name="hayAgua"
-                        [(ngModel)]="form.hayAgua" #agua="ngModel" />
-                    <label for="hayAgua" class="form-check-label small">Agua</label>
+                    <input type="checkbox" id="waterAvailable" class="form-check-input" name="waterAvailable"
+                        [(ngModel)]="form.waterAvailable" #agua="ngModel" />
+                    <label for="waterAvailable" class="form-check-label small">Agua</label>
 
                 </div>
                 <div class="form-check">
-                    <input type="checkbox" id="hayComida" class="form-check-input" name="hayComida"
-                        [(ngModel)]="form.hayComida" #comida="ngModel" />
-                    <label for="hayComida" class="form-check-label small">Comida</label>
+                    <input type="checkbox" id="foodAvailable" class="form-check-input" name="foodAvailable"
+                        [(ngModel)]="form.foodAvailable" #food="ngModel" />
+                    <label for="foodAvailable" class="form-check-label small">food</label>
                 </div>
             </div>
             <div class="formPart">
                 <p>Se ha proporcinado: </p>
 
                 <div class="form-check">
-                    <input type="checkbox" id="agua" class="form-check-input" name="agua" [(ngModel)]="form.agua"
-                        #comida2="ngModel" />
+                    <input type="checkbox" id="water" class="form-check-input" name="water" [(ngModel)]="form.agua"
+                        #agua2="ngModel" />
                     <label for="agua" class="form-check-label small">Agua</label>
                 </div>
 
                 <div class="form-check">
-                    <input type="checkbox" id="comida" class="form-check-input" name="comida" [(ngModel)]="form.comida"
-                        #comida2="ngModel" />
-                    <label for="comida" class="form-check-label small">Comida</label>
+                    <input type="checkbox" id="food" class="form-check-input" name="food" [(ngModel)]="form.food"
+                        #food2="ngModel" />
+                    <label for="food" class="form-check-label small">food</label>
                 </div>
             </div>
         </div>
@@ -49,14 +49,6 @@
                 </button>
             </div>
             <br>
-            <!--       <div class="form-group">
-          <div
-            class="alert alert-danger"
-            role="alert"
-            *ngIf="f.submitted && isLoginFailed">
-            Credenciales incorrectas
-          </div>
-        </div> -->
         </form>
 
     </div>

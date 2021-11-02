@@ -2,10 +2,10 @@
     <li class="nav-item" [ngClass]="{'active' : router == '/colonias'}">
       <a class="nav-link" aria-current="page"  href="/colonias">Mapa Colonias</a>
     </li>
-    <li class="nav-item" [ngClass]="{'active' : router.includes('/alimentar')}">
-      <a class="nav-link" href="/alimentar">Alimentar Colonia</a>
-    </li>
     <li class="nav-item"  [ngClass]="{'active' : router==='/colonia'}">
       <a class="nav-link" href="/colonia">Registrar Colonia</a>
+    </li>
+    <li class="nav-item" [ngClass]="{'active' : router.includes('/alimentar')}">
+      <a class="nav-link" href="/alimentar">Alimentar Colonia</a>
     </li>
   </ul>

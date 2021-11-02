@@ -1,0 +1,86 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { ColonyModel } from '../model/colony.model';
+import { catchError, map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { FeedingModel } from '../model/feeding.model';
+import { ColonyRequestModel } from '@app/model/colonyRequest.model';
+import Swal from 'sweetalert2/dist/sweetalert2.js';  
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ColonyService {
+
+  private url = "http://localhost:8005/v1"
+
+  constructor(private http: HttpClient) { }
+
+
+  getColonies(): Observable<any> {
+    return this.http.get<ColonyModel[]>(`${this.url}/colonies`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getColony(lat: number, lng: number): Observable<any> {
+    return this.http.get<ColonyModel>(`${this.url}/colonies?lat=${lat}&lng=${lng}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getColonyById(id: number): Observable<any> {
+    return this.http.get<ColonyModel>(`${this.url}/colony/${id}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  saveColony(colony: ColonyRequestModel): Observable<any> {
+    return this.http.post<ColonyModel[]>(`${this.url}/colony`, colony)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+  getAlimentacion(colonyId:number): Observable<any> {
+    return this.http.get<FeedingModel>(`${this.url}/colony/${colonyId}/feeding`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  saveFeeding(colonyId:number, alimentacion: FeedingModel): Observable<any> {
+    return this.http.post<ColonyModel[]>(`${this.url}/colony/${colonyId}/feeding`, alimentacion)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+  private handleError(error: HttpErrorResponse): any {
+    if (error.error instanceof ErrorEvent) {
+      console.error('An error occurred:', error.error.message);
+    } else {
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+        let errorMessage ='';
+        error.error.error === 'Unauthorized' ? errorMessage = 'Usuario no autenticado o token expirado' : errorMessage = error.error.message;
+        Swal.fire({  
+          icon: 'error',  
+          title: 'Error',  
+          text:  errorMessage,  
+        })  
+    }
+    return throwError(
+      'Something bad happened; please try again later.');
+  }
+
+
+
+}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ColoniaService } from 'src/app/services/colonia.service';
+import { ColonyService } from '@app/services/colony.service';
 
 @Component({
   selector: 'app-address',
@@ -8,10 +8,10 @@ import { ColoniaService } from 'src/app/services/colonia.service';
 })
 export class AddressComponent implements OnInit {
 
-  constructor(private coloniaService: ColoniaService) { }
+  constructor(private colonyService: ColonyService) { }
 
   ngOnInit(): void {
-    this.coloniaService.getColonias()
+    this.colonyService.getColonies()
     .subscribe( resp => {
       console.log(resp)
     })

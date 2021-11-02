@@ -1,16 +1,16 @@
 import { Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ColoniaModel } from '@app/model/colonia.model';
-import { ColoniaService } from '@app/services/colonia.service';
+import { ColonyModel } from '@app/model/colony.model';
+import { ColonyService } from '@app/services/colony.service';
 import { TokenStorageService } from '@app/services/token-storage.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
-  selector: 'app-alimentacion',
-  templateUrl: './alimentacion.component.html',
-  styleUrls: ['./alimentacion.component.css']
+  selector: 'app-feeding',
+  templateUrl: './feeding.component.html',
+  styleUrls: ['./feeding.component.css']
 })
-export class AlimentacionComponent implements OnInit {
+export class FeedingnComponent implements OnInit {
 
   form: any = {};
 
@@ -22,12 +22,10 @@ export class AlimentacionComponent implements OnInit {
   private contentPlaceholder: ElementRef;
 
 
-  colonias: ColoniaModel[] = [];
-  constructor(public service: ColoniaService, private tokenStorage: TokenStorageService,
+  colonies: ColonyModel[] = [];
+  constructor(public service: ColonyService, private tokenStorage: TokenStorageService,
     private route: ActivatedRoute, private router: Router) {
     this.service = service;
-
-
   }
 
   ngOnInit(): void {
@@ -35,21 +33,20 @@ export class AlimentacionComponent implements OnInit {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.route.params.subscribe(routeParams => {
-        routeParams.id ? (this.id = routeParams.id, this.getColonia(routeParams.id)) : null;
+        routeParams.id ? (this.id = routeParams.id, this.getColony(routeParams.id)) : null;
         this.waitForElement(this.id+'');
-
       });
-      this.getColonias();
+      this.getColonies();
     }
   }
 
   onSubmit(): void {
     console.log(this.form)
-    this.saveAlimentacion(this.form, this.id);
+    this.saveFedding(this.form, this.id);
   }
 
-  getColonia(id: number) {
-    this.service.getColoniaById(id).subscribe((resp: any) => {
+  getColony(id: number) {
+    this.service.getColonyById(id).subscribe((resp: any) => {
       console.log(resp);
       this.center = {
         lat: resp.latitud,
@@ -59,10 +56,10 @@ export class AlimentacionComponent implements OnInit {
     });
 
   }
-  saveAlimentacion(alimentacion: any, coloniaId: number): void {
-    console.log(coloniaId)
-    this.service.saveAlimentacion(coloniaId, alimentacion).subscribe((resp: any) => {
-      console.log(alimentacion);
+  saveFedding(feeding: any, colonyId: number): void {
+    console.log(colonyId)
+    this.service.saveFeeding(colonyId, feeding).subscribe((resp: any) => {
+      console.log(feeding);
       Swal.fire({
         title: 'Colonia alimentada',
         text:  'Se han guardado los datos correctamente',  
@@ -71,10 +68,10 @@ export class AlimentacionComponent implements OnInit {
     });
   }
 
-  getColonias(): void {
-    this.service.getColonias().subscribe((resp: any) => {
-      this.colonias = resp;
-      console.log(this.colonias);
+  getColonies(): void {
+    this.service.getColonies().subscribe((resp: any) => {
+      this.colonies = resp;
+      console.log(this.colonies);
     });
   }
 
