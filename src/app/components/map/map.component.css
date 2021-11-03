@@ -38,3 +38,12 @@
   .loading{
     height: 20vh;
   }
+  .feeding-info{
+    color: gray;
+    font-size: 0.9em;
+    margin: 0;
+  }
+
+  .feed-image img{
+    width: 2.5em;
+  }

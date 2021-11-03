@@ -63,9 +63,9 @@
         <label for="passwordValidate">Repita su contraseña</label>
         <input type="password" class="form-control" name="passwordValidate" [(ngModel)]="form.passwordValidate" required minlength="6"
           #passwordValidate="ngModel" />
-        <div class="alert-danger" *ngIf="f.submitted && (passwordValidate.invalid || passwordValidate != form.password) ">
+        <div class="alert-danger" *ngIf="f.submitted && (passwordValidate.invalid || form.passwordValidate != form.password) ">
           <div *ngIf="passwordValidate.errors && passwordValidate.errors.required">La validación de contraseña es obligatoria</div>
-          <div *ngIf="passwordValidate != form.password">
+          <div *ngIf="form.passwordValidate != form.password">
             La contraseña debe coincidir
           </div>
         </div>

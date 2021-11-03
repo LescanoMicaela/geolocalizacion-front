@@ -17,6 +17,10 @@ export class MapComponent implements OnInit {
 
   imageSrc = 'assets/images/cat-black-face.png'
   imageAlt = 'cat icon'
+  imageSrcWater = 'assets/images/water2.png'
+  imageAltWater = 'water icon'
+  imageSrcFood = 'assets/images/food2.png'
+  imageAltFood = 'food icon'
 
   registrar: boolean = false;
 

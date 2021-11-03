@@ -1,7 +1,6 @@
 <div>
-  <input 
-  *ngIf="!router.includes('/alimentar')"
-  [(ngModel)]="enteredDirection" #mapSearchField class="my-map-search-field" type="text" placeholder="Buscar" />
+  <input *ngIf="!router.includes('/alimentar')" [(ngModel)]="enteredDirection" #mapSearchField
+    class="my-map-search-field" type="text" placeholder="Buscar" />
   <google-map width="100%" height="35vh" [center]="center" [options]="options">
     <map-marker #markerElem *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
       [title]="marker.title" [options]="marker.options">
@@ -10,24 +9,35 @@
     <map-info-window>{{ infoContent }}</map-info-window>
   </google-map>
 
-  <div #directions *ngIf="(router === '/colonias' || router.includes('/alimentar') ) && !loading" id="direction" class="directions p-2">
-  <div [ngClass]="{'colonySelected' : colonySelected == c.id}" *ngFor=" let c of colonies;" class="d-flex flex-row bd-highlight mb-3" id="{{c.id}}" width="100%" >
-    <div class="p-2 bd-highlight"><img src="{{imageSrc}}" alt="{{imageAlt}}" /></div>
-    <div *ngIf="c.direction" class="p-2 bd-highlight" (click)="scroll(c.id)" [routerLink]="['/alimentar', c.id]">
-      <p class="fw-bold">{{c.direction[0]}}</p> 
-      <p>{{c.direction[1]}}</p>
+  <div #directions *ngIf="(router === '/colonias' || router.includes('/alimentar') ) && !loading" id="direction"
+    class="directions container p-2">
+    <div [ngClass]="{'colonySelected' : colonySelected == c.id}" *ngFor=" let c of colonies;" class="row p-2" id="{{c.id}}"
+      width="100%">
+      <div class="col-1"><img src="{{imageSrc}}" alt="{{imageAlt}}" /></div>
+      <div *ngIf="c.direction" class=" col-11" (click)="scroll(c.id)" [routerLink]="['/alimentar', c.id]">
+        <p class="fw-bold m-0">{{c.direction[0]}}</p>
+        <p>{{c.direction[1]}}</p>
+        <p  *ngIf="c.time" class="feeding-info">Última alimentación el {{c.time}}</p>
+        <p  *ngIf="!c.time" class="feeding-info">No existen registros de alimentación</p>
+
+        <div class="feed-image"><img  *ngIf="c.water" src="{{imageSrcWater}}" alt="{{imageAltWater}}" />
+              
+          <img src="{{imageSrcFood}}"  *ngIf="c.food" alt="{{imageAltFood}}" />
+        </div>
+      </div>
+
     </div>
   </div>
-</div>
 
-<div *ngIf="loading && (router === '/colonias' || router.includes('/alimentar'))" class="alert alert-info text-center mt-3 loading">
-  <h4 class="alert-heading">Cargando</h4>
-  <p>
-    <i class="fas fa-circle-notch fa-spin"></i>
-  </p>
-  <p class="mb-0">
-    Espere por favor
-  </p>
-</div>
+  <div *ngIf="loading && (router === '/colonias' || router.includes('/alimentar'))"
+    class="alert alert-info text-center mt-3 loading">
+    <h4 class="alert-heading">Cargando</h4>
+    <p>
+      <i class="fas fa-circle-notch fa-spin"></i>
+    </p>
+    <p class="mb-0">
+      Espere por favor
+    </p>
+  </div>
 
 </div>

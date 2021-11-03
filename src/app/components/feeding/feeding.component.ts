@@ -34,7 +34,7 @@ export class FeedingnComponent implements OnInit {
       this.isLoggedIn = true;
       this.route.params.subscribe(routeParams => {
         routeParams.id ? (this.id = routeParams.id, this.getColony(routeParams.id)) : null;
-        this.waitForElement(this.id+'');
+        this.waitForElement(this.id + '');
       });
       this.getColonies();
     }
@@ -58,15 +58,33 @@ export class FeedingnComponent implements OnInit {
   }
   saveFedding(feeding: any, colonyId: number): void {
     console.log(colonyId)
-    this.service.saveFeeding(colonyId, feeding).subscribe((resp: any) => {
-      console.log(feeding);
-      Swal.fire({
-        title: 'Colonia alimentada',
-        text:  'Se han guardado los datos correctamente',  
-        icon: 'success'
-      })
-    });
+    Swal.fire({
+      title: '¿Quiere guardar los datos?',
+      showDenyButton: true,
+      icon: 'warning',
+      confirmButtonText: 'Si',
+      denyButtonText: 'No',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.service.saveFeeding(colonyId, feeding).subscribe((resp: any) => {
+          console.log(feeding);
+          Swal.fire({
+            title: 'Colonia alimentada',
+            text: 'Se han guardado los datos correctamente',
+            icon: 'success'
+          })
+        })
+      } else if (result.isDenied) {
+        Swal.fire('No se han guardado los datos', '', 'info')
+      }
+    })
+
   }
+
+
+
+
 
   getColonies(): void {
     this.service.getColonies().subscribe((resp: any) => {
@@ -83,7 +101,7 @@ export class FeedingnComponent implements OnInit {
       return;
     }
     let observer = new MutationObserver(mutations => {
-      mutations.forEach(function(mutation) {
+      mutations.forEach(function (mutation) {
         let nodes = Array.from(mutation.addedNodes);
         for (var node of nodes) {
           if (node.contains(document.getElementById(selector))) {
