@@ -75,6 +75,7 @@ export class FeedingnComponent implements OnInit {
             icon: 'success'
           })
         })
+        this.router.navigate(['/alimentar']);
       } else if (result.isDenied) {
         Swal.fire('No se han guardado los datos', '', 'info')
       }
