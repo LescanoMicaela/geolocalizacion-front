@@ -7,15 +7,22 @@ import { FeedingModel } from '../model/feeding.model';
 import { ColonyRequestModel } from '@app/model/colonyRequest.model';
 import Swal from 'sweetalert2/dist/sweetalert2.js';  
 
+import { TranslateService } from '@ngx-translate/core';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ColonyService {
 
+
   private url = "http://localhost:8005/v1"
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,public translate: TranslateService) { 
+    this.translate = translate;
+    this.handleError = this.handleError.bind(this);
+
+  }
 
 
   getColonies(): Observable<any> {
@@ -57,12 +64,12 @@ export class ColonyService {
   saveFeeding(colonyId:number, alimentacion: FeedingModel): Observable<any> {
     return this.http.post<ColonyModel[]>(`${this.url}/colony/${colonyId}/feeding`, alimentacion)
       .pipe(
-        catchError(this.handleError)
+        catchError(this.handleError.bind(this))
       );
   }
 
 
-  private handleError(error: HttpErrorResponse): any {
+   handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);
     } else {
@@ -70,16 +77,22 @@ export class ColonyService {
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
         let errorMessage ='';
-        error.error.error === 'Unauthorized' ? errorMessage = 'Usuario no autenticado o token expirado' : errorMessage = error.error.message;
+         error.error.message ? errorMessage = error.error.mesagge : errorMessage = error.error.error;
+
+        this.translate.get(`${errorMessage}`)
+        .subscribe( (text) => errorMessage = text);
+
+
         Swal.fire({  
           icon: 'error',  
           title: 'Error',  
-          text:  errorMessage,  
+          text: errorMessage 
         })  
     }
     return throwError(
       'Something bad happened; please try again later.');
   }
+
 
 
 

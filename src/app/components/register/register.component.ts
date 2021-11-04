@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '@app/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class RegisterComponent implements OnInit {
   errorMessage = '';
 
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router,public translate: TranslateService) { 
+    this.translate = translate;}
 
   ngOnInit(): void {
   }
@@ -35,8 +37,10 @@ export class RegisterComponent implements OnInit {
         }) 
       },
       err => {
-        console.log(err.error.mensaje)
-        this.errorMessage = err.error.mensaje;
+        console.log(err)
+        this.translate.get(`${err.error.message}`)
+        .subscribe( (text) => this.errorMessage = text);
+
         this.isSignUpFailed = true;
         Swal.fire({
           title: 'Error',

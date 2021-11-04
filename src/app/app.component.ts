@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { TokenStorageService } from './services/token-storage.service';
 
 @Component({
@@ -11,7 +12,9 @@ export class AppComponent {
   isLoggedIn = false;
   username: string;
 
-  constructor(private tokenStorageService: TokenStorageService) { }
+  constructor(private tokenStorageService: TokenStorageService, private translate: TranslateService) {
+    translate.setDefaultLang('es');
+  }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();

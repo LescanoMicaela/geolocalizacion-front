@@ -21,6 +21,7 @@ export class MapComponent implements OnInit {
   imageAltWater = 'water icon'
   imageSrcFood = 'assets/images/food2.png'
   imageAltFood = 'food icon'
+  locationPressed = true
 
   registrar: boolean = false;
 
@@ -44,7 +45,7 @@ export class MapComponent implements OnInit {
   markers: any[] = [];
   infoContent = '';
 
-  loading = true;
+  loading = false;
   router: string;
   colonySelected: number;
 
@@ -54,16 +55,17 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loading = true;
     //to update class on selected
     this.route.params.subscribe(routeParams => {
       routeParams.id ? this.colonySelected = routeParams.id : null;
     });
     navigator.geolocation.getCurrentPosition((position) => {
+      this.locationPressed = true;
       this.center = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       }
+      this.getCurrentAddress(position.coords.latitude, position.coords.longitude)
       this.addMarker(position.coords.latitude, position.coords.longitude)
     })
   }
@@ -72,7 +74,9 @@ export class MapComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     // only run when property "data" changed
     if (changes['colonies']) {
-      if (this.colonies != []) {
+      if (this.colonies.length != 0) {
+        console.log(this.colonies)
+        this.loading = true;
         var that = this;
         this.colonies.forEach(
           (c, i, collection) => {
@@ -94,6 +98,7 @@ export class MapComponent implements OnInit {
 
   ngAfterViewInit(): void {
     if (this.searchField) {
+
       const searchBox = new google.maps.places.SearchBox(
         this.searchField.nativeElement,
       );
@@ -140,8 +145,9 @@ export class MapComponent implements OnInit {
           }
         });
         this.map.fitBounds(bounds);
-        this.newLat = bounds.getCenter().lat();
-        this.newLng = bounds.getCenter().lng();
+        this.locationPressed = true;
+        this.center.lat = bounds.getCenter().lat();
+        this.center.lng = bounds.getCenter().lng();
         this.addMarker(bounds.getCenter().lat(), bounds.getCenter().lng())
         this.enteredDirection = this.searchField.nativeElement.value;
       });
@@ -169,7 +175,19 @@ export class MapComponent implements OnInit {
     });
   }
 
-
+  getCurrentAddress(lat: number, lng: number) {
+    this.geoCoder.geocode({ 'location': { lat: lat, lng: lng } }, async (results, status) => {
+      if (status === 'OK') {
+        if (results[0]) {
+          this.enteredDirection = results[0].formatted_address;
+      }
+      }
+      else {
+        console.log('Geocoder failed due to: ' + status);
+      }
+    }
+    )
+  }
 
   addMarker(lat: number, lng: number) {
     this.markers.push({

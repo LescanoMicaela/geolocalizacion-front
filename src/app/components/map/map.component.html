@@ -1,6 +1,6 @@
 <div>
   <input *ngIf="!router.includes('/alimentar')" [(ngModel)]="enteredDirection" #mapSearchField
-    class="my-map-search-field" type="text" placeholder="Buscar" />
+    class="my-map-search-field" type="text" placeholder="Buscar" (keyup)="locationPressed = false" />
   <google-map width="100%" height="35vh" [center]="center" [options]="options">
     <map-marker #markerElem *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
       [title]="marker.title" [options]="marker.options">

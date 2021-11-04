@@ -6,6 +6,7 @@ import { TokenStorageService } from '@app/services/token-storage.service';
 import { MapComponent } from '../map/map.component';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 
 
@@ -27,8 +28,10 @@ export class ColonyFormComponent implements OnInit {
 
   registar = true;
 
+
   constructor(public service: ColonyService, private tokenStorage: TokenStorageService,
-    private cdRef: ChangeDetectorRef, private router: Router) { }
+    private cdRef: ChangeDetectorRef, private router: Router,public translate: TranslateService) { 
+      this.translate = translate;}
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
@@ -38,12 +41,12 @@ export class ColonyFormComponent implements OnInit {
 
 
   onSubmit(): void {
-    console.log(this.form, this.map.enteredDirection, this.map.newLng, this.map.newLat);
+    console.log(this.form, this.map.enteredDirection, this.map.center.lat, this.map.center.lng);
     let colony: ColonyRequestModel = new ColonyRequestModel(
       this.form.cats,
       this.form.register,
-      this.map.newLng,
-      this.map.newLat);
+      this.map.center.lng,
+      this.map.center.lat);
     console.log(colony);
     this.saveColonies(colony);
   }
@@ -53,14 +56,14 @@ export class ColonyFormComponent implements OnInit {
     if (!newColony.lat || !newColony.lng) {
       Swal.fire({
         title: 'Error',
-        text: 'Localización no encontrada',
+        text: this.translate.instant('LOCATION_NOT_FOUND'),
         icon: 'error'
       })
       return;
     }
 
     Swal.fire({
-      title: '¿Quiere registar una colonia en la localización seleccionada?',
+      title: this.translate.instant('SWAL.COLONY_FORM_TITLE'),
       showDenyButton: true,
       icon: 'warning',
       confirmButtonText: 'Si',
@@ -72,8 +75,8 @@ export class ColonyFormComponent implements OnInit {
           this.colony = resp;
           console.log(this.colony);
           Swal.fire({
-            title: 'Colonia registrada',
-            text: 'Se han guardado los datos correctamente',
+            title: this.translate.instant('COLONY_SAVED'),
+            text: this.translate.instant('DATA_SAVED'),
             icon: 'success'
           })
 
@@ -81,10 +84,10 @@ export class ColonyFormComponent implements OnInit {
         setTimeout(() => {
           this.router.navigate(['/colonias']);
         },
-          5000);
+          3000);
 
       } else if (result.isDenied) {
-        Swal.fire('No se ha guardado la colonia', '', 'info')
+        Swal.fire(this.translate.instant('COLONY_NOT_SAVED'), '', 'info')
       }
     })
   }

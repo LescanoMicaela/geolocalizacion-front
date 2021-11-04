@@ -1,0 +1,23 @@
+{
+    "COLONY_ALREADY_EXISTS_IN_LOCATION": "Ya existe una colonia registrada en esta localización",
+    "Unauthorized": "Usuario no autenticado o token expirado",
+    "NULL_FEEDING": "No hay alimentación registrada",
+    "LOCATION_NOT_FOUND": "Localización no encontrada",
+    "LNG_NOT_FOUND": "Longitud no encontrada",
+    "LAT_NOT_FOUND": "Latitud no encontrada",
+    "TOKEN_NOT_FOUND": "El token ha expirado",
+    "EMAIL_ALREADY_REGISTERED": "Ya existe un/a usuario/o con este email",
+    "REGISTRATION_SUCCESSFUL": "Se ha registrado correctamente",
+    "REGISTRATION_UNSUCCESSFUL": "No se ha registrado",
+    "COLONY_NOT_FOUND": "No se ha encontrado la colonia",
+    "COLONY_NOT_SAVED": "No se ha registrado la colonia",
+    "FEEDING_NOT_SAVED": "No se han guardado los datos de la alimentación",
+    "LOCATION_NOT_SAVED": "No se ha guardado la localización",
+    "NO_USER_LOGGED": "No esta autenticado, ingrese en su cuenta por favor",
+    "NO_USER_FOUND": "No se ha encontrado al/a usuario/a",
+    "DATA_SAVED": "Se han guardado los datos correctamente",
+    "COLONY_SAVED": "Colonia registrada",
+    "SWAL":{
+        "COLONY_FORM_TITLE": "¿Quiere registar una colonia en la localización seleccionada?"
+    }
+}

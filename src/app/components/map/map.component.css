@@ -17,6 +17,8 @@
   .directions {
     overflow-y: scroll;
     height: 25vh;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+
   }
 
   .directions img{
