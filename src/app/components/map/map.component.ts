@@ -238,7 +238,7 @@ export class MapComponent implements OnInit {
       Swal.fire({
         html: catimg + '<h5>' + c.direction[0] + '</h5>' +
           '<p>' + direction1 + '</p>' +
-          '<div style="height: 50vh; overflow-y: scroll; text-align: initial;"><h5 style="text-align: initial;">Informaciíon </h5>' +
+          '<div style="height: 50vh; overflow-y: scroll; text-align: initial;"><h5 style="text-align: initial;">Informacíon </h5>' +
           '<p style="text-align: initial;">' +register + '</p>'+
           '<p style="text-align: initial;"> Número de gatos: '+ c.cats+ '</p>' +
           '<br><h5 style="text-align: initial;">Alimentación</h5>' +

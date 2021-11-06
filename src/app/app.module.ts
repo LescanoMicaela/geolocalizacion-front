@@ -10,7 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { MapComponent } from './components/map/map.component';
-import { AddressComponent } from './components/address/address.component';
 import { ColonyComponent } from './components/colony/colony.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ColonyFormComponent } from './components/colony-form/colony-form.component';
@@ -27,7 +26,6 @@ import { FooterComponent } from './components/footer/footer.component';
     AppComponent,
     MenuComponent,
     MapComponent,
-    AddressComponent,
     ColonyComponent,
     ColonyFormComponent,
     FeedingnComponent,
