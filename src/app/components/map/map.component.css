@@ -21,6 +21,11 @@
 
   }
 
+.colony{
+  margin: 1.5em 0;
+
+}
+
   .directions img{
     width: 1.5em;
   }
@@ -48,4 +53,8 @@
 
   .feed-image img{
     width: 2.5em;
+  }
+
+  .feedingIngfo{
+    height: 40px;
   }

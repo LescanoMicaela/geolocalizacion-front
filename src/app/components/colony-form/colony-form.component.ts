@@ -84,7 +84,7 @@ export class ColonyFormComponent implements OnInit {
         setTimeout(() => {
           this.router.navigate(['/colonias']);
         },
-          3000);
+          1000);
 
       } else if (result.isDenied) {
         Swal.fire(this.translate.instant('COLONY_NOT_SAVED'), '', 'info')

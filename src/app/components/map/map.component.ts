@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild, Input, SimpleChanges } from '@angular/core'
 import { GoogleMap } from '@angular/google-maps'
 import { ActivatedRoute, Router } from '@angular/router';
+import { ColonyService } from '@app/services/colony.service';
 import { ColonyModel } from 'src/app/model/colony.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-map',
@@ -21,6 +23,10 @@ export class MapComponent implements OnInit {
   imageAltWater = 'water icon'
   imageSrcFood = 'assets/images/food2.png'
   imageAltFood = 'food icon'
+
+  imageSrcInfo = 'assets/images/info (2).png'
+  imageAltInfo = 'more info icon'
+
   locationPressed = true
 
   registrar: boolean = false;
@@ -49,7 +55,7 @@ export class MapComponent implements OnInit {
   router: string;
   colonySelected: number;
 
-  constructor(public _router: Router, private route: ActivatedRoute) {
+  constructor(public _router: Router, private route: ActivatedRoute, public service: ColonyService) {
     this.router = _router.url;
     this._router = _router;
   }
@@ -180,7 +186,7 @@ export class MapComponent implements OnInit {
       if (status === 'OK') {
         if (results[0]) {
           this.enteredDirection = results[0].formatted_address;
-      }
+        }
       }
       else {
         console.log('Geocoder failed due to: ' + status);
@@ -200,6 +206,42 @@ export class MapComponent implements OnInit {
 
   scroll(id: number) {
     document.getElementById(id + '').scrollIntoView();
+  }
+
+
+  showInfo(c: ColonyModel) {
+
+    const waterImg = '<img _ngcontent-ama-c69="" src="' + this.imageSrcWater + '" alt="' + this.imageAltWater + '" style="width:2em;">';
+    const foodImg = '<img _ngcontent-ama-c69="" src="' + this.imageSrcFood + '"  alt="' + this.imageAltFood + '"   style="width:2em;">'
+
+    const catimg = '<img _ngcontent-ama-c69="" src="' + this.imageSrc + '" alt="' + this.imageAlt + '" style="width:2em;">';
+
+
+    let alimentacion = '<ul>';
+    this.service.getFeeding(c.id).subscribe(resp => {
+      if (resp.length === 0) alimentacion = '<br><p> No existen registros <p>'
+      resp.forEach(el => {
+        let water = el.water ? waterImg : '';
+        let food = el.food ? foodImg : '';
+        let empty = water + food == '' ? '/' : ''
+
+        let waterAvailable = el.waterAvailable ? waterImg : '';
+        let foodAvailable = el.foodAvailable ? foodImg : '';
+        let emptyAvailable = waterAvailable + foodAvailable == '' ? '/' : ''
+
+        alimentacion += '<li style="text-align: initial;"><strong>' + el.time + ' </strong><br> <p>Tenía: ' + waterAvailable + ' ' + foodAvailable + emptyAvailable + '</p>' +
+          '<p>Se proporcionó: ' + water + ' ' + food + empty + '</p></li>'
+      });
+
+      let direction1 = c.direction[1] ? c.direction[1] : "";
+      Swal.fire({
+        html: catimg + '<h5>' + c.direction[0] + '</h5>' +
+          '<p>' + direction1 + '</p>' +
+          '<br><div style="height: 50vh; overflow-y: scroll;"> <h5>Alimentación</h5><br>' +
+          alimentacion + '</ul></div>',
+      });
+    })
+    console.log(c)
   }
 
 }

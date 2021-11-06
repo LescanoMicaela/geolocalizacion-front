@@ -54,7 +54,7 @@ export class ColonyService {
   }
 
 
-  getAlimentacion(colonyId:number): Observable<any> {
+  getFeeding(colonyId:number): Observable<any> {
     return this.http.get<FeedingModel>(`${this.url}/colony/${colonyId}/feeding`)
       .pipe(
         catchError(this.handleError)
@@ -77,7 +77,7 @@ export class ColonyService {
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
         let errorMessage ='';
-         error.error.message ? errorMessage = error.error.mesagge : errorMessage = error.error.error;
+         error.error.message ? errorMessage = error.error.message : errorMessage = error.error.error;
 
         this.translate.get(`${errorMessage}`)
         .subscribe( (text) => errorMessage = text);
