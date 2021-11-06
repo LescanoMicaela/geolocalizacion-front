@@ -10,7 +10,7 @@
   </google-map>
 
   <div #directions *ngIf="(router === '/colonias' || router.includes('/alimentar') ) && !loading" id="direction"
-    class="directions container">
+  [ngClass]="{'directionsColonies' : router === '/colonias'}" class="directions container">
     <div [ngClass]="{'colonySelected' : colonySelected == c.id}" *ngFor=" let c of colonies;" class="row colony" id="{{c.id}}"
       width="100%">
       <div class="col-1"><img src="{{imageSrc}}" alt="{{imageAlt}}" /></div>

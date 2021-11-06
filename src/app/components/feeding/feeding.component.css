@@ -1,3 +1,7 @@
 .formPart{
-    width:50%
+    width:50%;
+}
+
+.formPart p {
+    margin: 0;
 }

@@ -17,7 +17,7 @@
   .directions {
     overflow-y: scroll;
     height: 25vh;
-    overflow-x: hidden; /* Hide horizontal scrollbar */
+    overflow-x: hidden; 
 
   }
 
@@ -57,4 +57,8 @@
 
   .feedingIngfo{
     height: 40px;
+  }
+
+  .directionsColonies{
+    height: 40vh;;
   }
