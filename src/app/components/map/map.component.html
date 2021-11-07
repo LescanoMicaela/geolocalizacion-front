@@ -11,7 +11,7 @@
 
   <div #directions *ngIf="(router === '/colonias' || router.includes('/alimentar') ) && !loading" id="direction"
     [ngClass]="{'directionsColonies' : router === '/colonias'}" class="directions container">
-    <app-colony-info [ngClass]="{'colonySelected' : colonySelected == c.id}" *ngFor=" let c of colonies;" id="{{c.id}}"
+    <app-colony-info *ngFor=" let c of colonies;" id="{{c.id}}"
       width="100%" [colony]=c></app-colony-info>
   </div>
 

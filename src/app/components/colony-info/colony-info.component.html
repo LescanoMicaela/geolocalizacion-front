@@ -1,4 +1,4 @@
-<div class="directions row colony">
+<div class="directions row colony" [ngClass]="{'colonySelected' : colonySelected == colony.id}" >
 <div class="col-1"><img src="{{imageSrc}}" alt="{{imageAlt}}" /></div>
 <div *ngIf="colony.direction" class=" col-9" (click)="scroll(colony.id)" [routerLink]="['/alimentar', colony.id]">
   <p class="fw-bold m-0">{{colony.direction[0]}}</p>

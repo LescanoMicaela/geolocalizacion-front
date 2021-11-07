@@ -20,16 +20,12 @@
     overflow-x: hidden; 
 
   }
-
 .colony{
   margin: 1.5em 0;
-
 }
-
   .loading{
     height: 20vh;
   }
-
 
   .directionsColonies{
     height: 40vh;;

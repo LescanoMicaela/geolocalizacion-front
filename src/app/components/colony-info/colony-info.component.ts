@@ -24,16 +24,20 @@ export class ColonyInfoComponent implements OnInit {
   imageAlt = 'cat icon'
   imageSrcInfo = 'assets/images/info (2).png'
   imageAltInfo = 'more info icon'
-
+  colonySelected: number;
   router: string;
   
   @Input()
   colony: ColonyModel;
-  constructor(public service: ColonyService) { 
+  constructor(public _router: Router, private route: ActivatedRoute, public service: ColonyService) {
+    this.router = _router.url;
+    this._router = _router;
   }
 
   ngOnInit(): void {
-
+    this.route.params.subscribe(routeParams => {
+      routeParams.id ? this.colonySelected = routeParams.id : null;
+    });
   }
 
 
