@@ -26,38 +26,10 @@
 
 }
 
-  .directions img{
-    width: 1.5em;
-  }
-
-  .colonySelected{
-    background-color: #b1b1eb42;
-/*     box-shadow: inset 3px 3px 3px rgba(255,255,255,.7), inset -2px -2px 3px rgba(0,0,0,.1), 2px 2px 10px rgba(0,0,0,.1);
- */  	box-shadow:inset 2px 2px 4px rgba(120, 120, 120, .4), inset -3px -3px 3px rgba(255,255,255,.4);
-
-  }
-
-.notSelected{
-  background-color: white;
-  box-shadow: none;
-}
-
   .loading{
     height: 20vh;
   }
-  .feeding-info{
-    color: gray;
-    font-size: 0.9em;
-    margin: 0;
-  }
 
-  .feed-image img{
-    width: 2.5em;
-  }
-
-  .feedingIngfo{
-    height: 40px;
-  }
 
   .directionsColonies{
     height: 40vh;;

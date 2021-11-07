@@ -10,23 +10,9 @@
   </google-map>
 
   <div #directions *ngIf="(router === '/colonias' || router.includes('/alimentar') ) && !loading" id="direction"
-  [ngClass]="{'directionsColonies' : router === '/colonias'}" class="directions container">
-    <div [ngClass]="{'colonySelected' : colonySelected == c.id}" *ngFor=" let c of colonies;" class="row colony" id="{{c.id}}"
-      width="100%">
-      <div class="col-1"><img src="{{imageSrc}}" alt="{{imageAlt}}" /></div>
-      <div *ngIf="c.direction" class=" col-9" (click)="scroll(c.id)" [routerLink]="['/alimentar', c.id]">
-        <p class="fw-bold m-0">{{c.direction[0]}}</p>
-        <p>{{c.direction[1]}}</p>
-        <p  *ngIf="c.time" class="feeding-info">Última alimentación el {{c.time}}</p>
-        <p  *ngIf="!c.time" class="feeding-info">No existen registros de alimentación</p>
-
-        <div class="feed-image"><img  *ngIf="c.water" src="{{imageSrcWater}}" alt="{{imageAltWater}}" />
-              
-          <img src="{{imageSrcFood}}"  *ngIf="c.food" alt="{{imageAltFood}}" />
-        </div>
-      </div>
-      <div  (click)="showInfo(c)" class="col-1"><img src="{{imageSrcInfo}}" alt="{{imageAltInfo}}" /></div>
-    </div>
+    [ngClass]="{'directionsColonies' : router === '/colonias'}" class="directions container">
+    <app-colony-info [ngClass]="{'colonySelected' : colonySelected == c.id}" *ngFor=" let c of colonies;" id="{{c.id}}"
+      width="100%" [colony]=c></app-colony-info>
   </div>
 
   <div *ngIf="loading && (router === '/colonias' || router.includes('/alimentar'))"

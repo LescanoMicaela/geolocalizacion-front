@@ -1,0 +1,15 @@
+<div class="directions row colony">
+<div class="col-1"><img src="{{imageSrc}}" alt="{{imageAlt}}" /></div>
+<div *ngIf="colony.direction" class=" col-9" (click)="scroll(colony.id)" [routerLink]="['/alimentar', colony.id]">
+  <p class="fw-bold m-0">{{colony.direction[0]}}</p>
+  <p>{{colony.direction[1]}}</p>
+  <p  *ngIf="colony.time" class="feeding-info">Última alimentación el {{colony.time}}</p>
+  <p  *ngIf="!colony.time" class="feeding-info">No existen registros de alimentación</p>
+
+  <div class="feed-image"><img  *ngIf="colony.water" src="{{imageSrcWater}}" alt="{{imageAltWater}}" />
+        
+    <img src="{{imageSrcFood}}"  *ngIf="colony.food" alt="{{imageAltFood}}" />
+  </div>
+</div>
+<div  (click)="showInfo(colony)" class="col-1"><img src="{{imageSrcInfo}}" alt="{{imageAltInfo}}" /></div>
+</div>

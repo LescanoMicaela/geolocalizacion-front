@@ -19,6 +19,7 @@ import { RegisterComponent } from './components/register/register.component';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { FooterComponent } from './components/footer/footer.component';
+import { ColonyInfoComponent } from './components/colony-info/colony-info.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { FooterComponent } from './components/footer/footer.component';
     FeedingnComponent,
     RegisterComponent,
     LoginComponent,
-    FooterComponent
+    FooterComponent,
+    ColonyInfoComponent
   ],
   imports: [
     BrowserModule,

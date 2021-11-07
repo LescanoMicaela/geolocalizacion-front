@@ -19,14 +19,14 @@ export class MapComponent implements OnInit {
 
   imageSrc = 'assets/images/cat-black-face.png'
   imageAlt = 'cat icon'
-  imageSrcWater = 'assets/images/water2.png'
+/*   imageSrcWater = 'assets/images/water2.png'
   imageAltWater = 'water icon'
   imageSrcFood = 'assets/images/food2.png'
   imageAltFood = 'food icon'
 
   imageSrcInfo = 'assets/images/info (2).png'
   imageAltInfo = 'more info icon'
-
+ */
   locationPressed = true
 
   registrar: boolean = false;
@@ -204,12 +204,12 @@ export class MapComponent implements OnInit {
     })
   }
 
-  scroll(id: number) {
+/*   scroll(id: number) {
     document.getElementById(id + '').scrollIntoView();
-  }
+  } */
 
 
-  showInfo(c: ColonyModel) {
+/*   showInfo(c: ColonyModel) {
 
     const waterImg = '<img _ngcontent-ama-c69="" src="' + this.imageSrcWater + '" alt="' + this.imageAltWater + '" style="width:2em;">';
     const foodImg = '<img _ngcontent-ama-c69="" src="' + this.imageSrcFood + '"  alt="' + this.imageAltFood + '"   style="width:2em;">'
@@ -246,6 +246,6 @@ export class MapComponent implements OnInit {
       });
     })
     console.log(c)
-  }
+  } */
 
 }
