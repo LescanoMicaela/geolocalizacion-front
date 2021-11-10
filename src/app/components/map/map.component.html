@@ -17,12 +17,12 @@
 
   <div *ngIf="loading && (router === '/colonias' || router.includes('/alimentar'))"
     class="alert alert-info text-center mt-3 loading">
-    <h4 class="alert-heading">Cargando</h4>
+    <h4 class="alert-heading">{{ "LOADING" | translate }}</h4>
     <p>
       <i class="fas fa-circle-notch fa-spin"></i>
     </p>
     <p class="mb-0">
-      Espere por favor
+      {{ "WAIT" | translate }}
     </p>
   </div>
 

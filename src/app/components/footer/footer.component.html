@@ -1,3 +1,5 @@
 <div class="text-center">
-    <p *ngIf="!isLoggedIn">Para registrar o alimentar una colonia debes <a href="/register">registrarte</a> o <a href="/login">ingresar</a> a tu cuenta</p>
+    <p *ngIf="!isLoggedIn">{{ "FOOTER.MUST_BE" | translate }} 
+        <a href="/register">{{ "FOOTER.REGISTER" | translate }}</a> o 
+        <a href="/login">{{ "FOOTER.LOG" | translate }}</a></p>
 </div>

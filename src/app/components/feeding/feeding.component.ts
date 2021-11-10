@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ColonyModel } from '@app/model/colony.model';
 import { ColonyService } from '@app/services/colony.service';
 import { TokenStorageService } from '@app/services/token-storage.service';
+import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
@@ -24,7 +25,8 @@ export class FeedingnComponent implements OnInit {
 
   colonies: ColonyModel[] = [];
   constructor(public service: ColonyService, private tokenStorage: TokenStorageService,
-    private route: ActivatedRoute, private router: Router) {
+    private route: ActivatedRoute, private router: Router, public translate: TranslateService) {
+    
     this.service = service;
   }
 
@@ -59,33 +61,29 @@ export class FeedingnComponent implements OnInit {
   saveFedding(feeding: any, colonyId: number): void {
     console.log(colonyId)
     Swal.fire({
-      title: '¿Quiere guardar los datos?',
+      title: this.translate.instant('MODAL.SAVE_DATA'),
       showDenyButton: true,
       icon: 'warning',
-      confirmButtonText: 'Si',
-      denyButtonText: 'No',
+      confirmButtonText: this.translate.instant('BUTTONS.YES'),
+      denyButtonText: this.translate.instant('BUTTONS.NO'),
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         this.service.saveFeeding(colonyId, feeding).subscribe((resp: any) => {
           console.log(feeding);
           Swal.fire({
-            title: 'Colonia alimentada',
-            text: 'Se han guardado los datos correctamente',
+            title: this.translate.instant('FEEDING.COLONY_FED'),
+            text: this.translate.instant('MODAL.SAVED'),
             icon: 'success'
           })
         })
         this.getColonies();
         this.router.navigate(['/alimentar']);
       } else if (result.isDenied) {
-        Swal.fire('No se han guardado los datos', '', 'info')
+        Swal.fire(this.translate.instant('MODAL.NOT_SAVED'), '', 'info')
       }
     })
 
   }
-
-
-
 
 
   getColonies(): void {
@@ -95,7 +93,6 @@ export class FeedingnComponent implements OnInit {
     });
   }
 
-  //scroll al element seleccionado
   waitForElement(selector) {
     let element = document.getElementById(selector);
     if (element) {

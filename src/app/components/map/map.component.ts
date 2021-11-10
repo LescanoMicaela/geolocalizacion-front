@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild, Input, SimpleChanges } from '
 import { GoogleMap } from '@angular/google-maps'
 import { ActivatedRoute, Router } from '@angular/router';
 import { ColonyService } from '@app/services/colony.service';
+import { TranslateService } from '@ngx-translate/core';
 import { ColonyModel } from 'src/app/model/colony.model';
 
 @Component({
@@ -41,18 +42,15 @@ export class MapComponent implements OnInit {
   infoContent = '';
   loading = false;
   router: string;
-/*   colonySelected: number;
- */
-  constructor(public _router: Router, private route: ActivatedRoute, public service: ColonyService) {
+  /*   colonySelected: number;
+   */
+  constructor(public _router: Router, private route: ActivatedRoute,
+    public service: ColonyService, public translate: TranslateService) {
     this.router = _router.url;
     this._router = _router;
   }
 
   ngOnInit(): void {
-    //to update class on selected
-/*     this.route.params.subscribe(routeParams => {
-      routeParams.id ? this.colonySelected = routeParams.id : null;
-    }); */
     navigator.geolocation.getCurrentPosition((position) => {
       this.locationPressed = true;
       this.center = {
@@ -158,12 +156,12 @@ export class MapComponent implements OnInit {
           this.address = results[0].formatted_address;
           if (colony != null) colony.direction = this.address.match(/[^,]+,[^,]+/g);
         } else {
-          colony.direction = ["SIN DIRECCIÓN", "SIN NÚMERO"]
+          colony.direction = [this.translate.instant('MAP.NO_ADDRESS'), this.translate.instant('MAP.NO_NUMBER')]
         }
       } else if (status === 'OVER_QUERY_LIMIT') {
       }
       else {
-        colony.direction = ["SIN DIRECCIÓN", "SIN NÚMERO"]
+        colony.direction = [this.translate.instant('MAP.NO_ADDRESS'), this.translate.instant('MAP.NO_NUMBER')]
         console.log('Geocoder failed due to: ' + status);
       }
     });

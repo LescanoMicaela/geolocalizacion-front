@@ -8,7 +8,7 @@
         novalidate
       >
         <div class="form-group">
-          <label for="username">Email</label>
+          <label for="username">{{ "LOGIN.EMAIL"| translate }}</label>
           <input
             type="text"
             class="form-control"
@@ -22,11 +22,11 @@
             role="alert"
             *ngIf="f.submitted && username.invalid"
           >
-            Debe introducir su email
+          {{ "LOGIN.VALIDATIONS.EMAIL" | translate }}
           </div>
         </div>
         <div class="form-group">
-          <label for="password">Contraseña</label>
+          <label for="password"> {{ "LOGIN.PASSWORD" | translate }}</label>
           <input
             type="password"
             class="form-control"
@@ -40,13 +40,13 @@
             role="alert"
             *ngIf="f.submitted && password.invalid"
           >
-            <div *ngIf="password.errors.required">Debe introducir su contraseña</div>
+            <div *ngIf="password.errors.required"> {{ "LOGIN.VALIDATIONS.PASSWORD" | translate }}</div>
           </div>
         </div>
         <div class="form-group text-center">
           <br>
           <button class="btn btn-primary btn-block">
-            Login
+            {{ "LOGIN.LOGIN" | translate }}
           </button>
         </div>
         <br>
@@ -55,13 +55,9 @@
             class="alert alert-danger"
             role="alert"
             *ngIf="f.submitted && isLoginFailed">
-            Credenciales incorrectas
+            {{ "LOGIN.VALIDATIONS.INCORRECT" | translate }}
           </div>
         </div>
       </form>
-  
-      <div class="alert alert-success" *ngIf="isLoggedIn">
-        Logged in as {{ roles }}.
-      </div>
     </div>
   </div>

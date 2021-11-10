@@ -33,7 +33,6 @@ export class ColonyComponent implements OnInit {
   getColonies(): void {
     this.service.getColonies().subscribe((resp: any) => {
       this.colonies = resp;
-      console.log(this.colonies);
     });
   }
 

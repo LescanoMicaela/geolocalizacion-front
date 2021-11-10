@@ -30,8 +30,8 @@ export class ColonyFormComponent implements OnInit {
 
 
   constructor(public service: ColonyService, private tokenStorage: TokenStorageService,
-    private cdRef: ChangeDetectorRef, private router: Router,public translate: TranslateService) { 
-      this.translate = translate;}
+    private cdRef: ChangeDetectorRef, private router: Router, public translate: TranslateService) {
+  }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
@@ -91,11 +91,10 @@ export class ColonyFormComponent implements OnInit {
   }
 
 
-
   //check changes if model changed
   //manually trigger change detection for the current component for error: Expression ___ has changed after it was checked
   ngAfterViewInit() {
-    if(this.map) this.map.enteredDirection = '';
+    if (this.map) this.map.enteredDirection = '';
     this.cdRef.detectChanges();
   }
 
