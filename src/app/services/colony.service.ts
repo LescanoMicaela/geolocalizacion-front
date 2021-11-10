@@ -53,6 +53,12 @@ export class ColonyService {
       );
   }
 
+  updateColony(id:number, colony: ColonyRequestModel): Observable<any> {
+    return this.http.put<ColonyModel[]>(`${this.url}/colony/${id}`, colony)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
   getFeeding(colonyId:number): Observable<any> {
     return this.http.get<FeedingModel>(`${this.url}/colony/${colonyId}/feeding`)

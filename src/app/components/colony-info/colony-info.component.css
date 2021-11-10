@@ -9,9 +9,6 @@
     margin: 0;
   }
 
-  .feed-image img{
-    width: 2.5em;
-  }
 
   .feedingIngfo{
     height: 40px;
@@ -19,4 +16,22 @@
 
   .directions img{
     width: 1.5em;
+  }
+
+  
+  .feed-image img{
+    width: 2.5em;
+  }
+
+  .buttons{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .buttons img{
+    margin: 0.5em 0;
+  }
+
+  .swal2-input[type=number]{
+    max-width: 80% !important;
   }

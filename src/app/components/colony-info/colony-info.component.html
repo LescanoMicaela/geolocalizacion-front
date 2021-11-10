@@ -1,8 +1,11 @@
-<div class="directions row colony" [ngClass]="{'colonySelected' : colonySelected == colony.id}" >
-<div class="col-1"><img src="{{imageSrc}}" alt="{{imageAlt}}" /></div>
+<div class="directions row colony pt-2" [ngClass]="{'colonySelected' : colonySelected == colony.id}" >
+<div class="col-1">
+  <!-- <img src="{{imageSrc}}" alt="{{imageAlt}}" /> -->
+</div>
 <div *ngIf="colony.direction" class=" col-9" (click)="scroll(colony.id)" [routerLink]="['/alimentar', colony.id]">
-  <p class="fw-bold m-0">{{colony.direction[0]}}</p>
+  <p class="fw-bold m-1">{{colony.direction[0]}}</p>
   <p>{{colony.direction[1]}}</p>
+  <p><img src="{{imageSrcCat}}" alt="{{imageAlt}}"> x {{colony.cats}}</p>
   <p  *ngIf="colony.time" class="feeding-info">Última alimentación el {{colony.time}}</p>
   <p  *ngIf="!colony.time" class="feeding-info">No existen registros de alimentación</p>
 
@@ -11,5 +14,8 @@
     <img src="{{imageSrcFood}}"  *ngIf="colony.food" alt="{{imageAltFood}}" />
   </div>
 </div>
-<div  (click)="showInfo(colony)" class="col-1"><img src="{{imageSrcInfo}}" alt="{{imageAltInfo}}" /></div>
+<div  class="col-1 buttons">
+  <img  (click)="showInfo(colony)" src="{{imageSrcInfo}}" alt="{{imageAltInfo}}" />
+  <img  (click)="edit(colony)"src="{{imageSrcEdit}}" alt="{{imageAltEdit}}">
+</div>
 </div>

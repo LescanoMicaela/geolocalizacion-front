@@ -95,7 +95,7 @@ export class ColonyFormComponent implements OnInit {
   //check changes if model changed
   //manually trigger change detection for the current component for error: Expression ___ has changed after it was checked
   ngAfterViewInit() {
-    this.map.enteredDirection = '';
+    if(this.map) this.map.enteredDirection = '';
     this.cdRef.detectChanges();
   }
 
