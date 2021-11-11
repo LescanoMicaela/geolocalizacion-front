@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ColonyModel } from '../model/colony.model';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { FeedingModel } from '../model/feeding.model';
 import { ColonyRequestModel } from '@app/model/colonyRequest.model';
-import Swal from 'sweetalert2/dist/sweetalert2.js';  
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -18,7 +18,7 @@ export class ColonyService {
 
   private url = "http://localhost:8005/v1"
 
-  constructor(private http: HttpClient,public translate: TranslateService) { 
+  constructor(private http: HttpClient, public translate: TranslateService) {
     this.translate = translate;
     this.handleError = this.handleError.bind(this);
 
@@ -53,21 +53,21 @@ export class ColonyService {
       );
   }
 
-  updateColony(id:number, colony: ColonyRequestModel): Observable<any> {
+  updateColony(id: number, colony: ColonyRequestModel): Observable<any> {
     return this.http.put<ColonyModel[]>(`${this.url}/colony/${id}`, colony)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  getFeeding(colonyId:number): Observable<any> {
+  getFeeding(colonyId: number): Observable<any> {
     return this.http.get<FeedingModel>(`${this.url}/colony/${colonyId}/feeding`)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  saveFeeding(colonyId:number, alimentacion: FeedingModel): Observable<any> {
+  saveFeeding(colonyId: number, alimentacion: FeedingModel): Observable<any> {
     return this.http.post<ColonyModel[]>(`${this.url}/colony/${colonyId}/feeding`, alimentacion)
       .pipe(
         catchError(this.handleError.bind(this))
@@ -75,28 +75,27 @@ export class ColonyService {
   }
 
 
-   handleError(error: HttpErrorResponse): any {
+  handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);
     } else {
       console.error(
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
-        let errorMessage ='';
-         error.error.message ? errorMessage = error.error.message : errorMessage = error.error.error;
+      let errorMessage = '';
+      error.error.message ? errorMessage = error.error.message : errorMessage = error.error.error;
+      this.translate.get(`${errorMessage}`)
+        .subscribe((text) => errorMessage = text);
 
-        this.translate.get(`${errorMessage}`)
-        .subscribe( (text) => errorMessage = text);
 
-
-        Swal.fire({  
-          icon: 'error',  
-          title: 'Error',  
-          text: errorMessage 
-        })  
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: errorMessage
+      })
     }
     return throwError(
-      'Something bad happened; please try again later.');
+      this.translate.instant('GENERAL_ERROR'));
   }
 
 

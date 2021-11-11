@@ -6,7 +6,7 @@ export class User {
     lastName: string;
     token: string;
 
-    constructor(username: string){
+    constructor(username: string) {
         this.username = username;
     }
 }

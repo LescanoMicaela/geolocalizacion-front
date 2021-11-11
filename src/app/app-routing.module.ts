@@ -25,7 +25,7 @@ const routes: Routes = [
 })
 export class AppRoutingModule {
 
-    
+
   @Input()
   isLoggedIn: boolean = false;
- }
+}

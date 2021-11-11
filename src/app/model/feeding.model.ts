@@ -1,4 +1,4 @@
-export class FeedingModel{
+export class FeedingModel {
 
     waterAvailable: boolean;
     water: boolean;
@@ -6,15 +6,15 @@ export class FeedingModel{
     food: boolean;
 
 
-    constructor( 
+    constructor(
         waterAvailable: boolean,
         water: boolean,
         foodAvailable: boolean,
         food: boolean,
-        time: Date){
+        time: Date) {
         this.waterAvailable = waterAvailable;
-        this.water=water;
+        this.water = water;
         this.foodAvailable = foodAvailable;
-        this.food=food;
+        this.food = food;
     }
 }

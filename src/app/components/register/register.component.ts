@@ -32,22 +32,29 @@ export class RegisterComponent implements OnInit {
         this.isSignUpFailed = false;
         Swal.fire({  
           icon: 'success',  
-          title: 'Usuario/a registrado/a',  
-          text:  'Se han guardado los datos correctamente',  
+          title: this.translate.instant('SIGNUP.REGISTER_SUCCES'),  
+          text:  this.translate.instant('MODAL.NOT_SAVED'),  
         }) 
       },
       err => {
         console.log(err)
+        err.error.message ?
         this.translate.get(`${err.error.message}`)
-        .subscribe( (text) => this.errorMessage = text);
+        .subscribe(
+           (text) => this.errorMessage = text
+        ) : this.getGeneralError();
 
         this.isSignUpFailed = true;
         Swal.fire({
           title: 'Error',
-          text:  this.errorMessage,  
+          text:  this.errorMessage ,  
           icon: 'error'
         })
       });
+  }
+
+  getGeneralError(){
+    this.errorMessage = this.translate.instant('GENERAL_ERROR');
   }
 
 

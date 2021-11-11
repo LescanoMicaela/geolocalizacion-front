@@ -2,71 +2,71 @@
   <div class="card card-container">
     <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
       <div class="form-group">
-        <label for="name">Nombre</label>
+        <label for="name"> {{ "SIGNUP.NAME" | translate }}</label>
         <input type="text" class="form-control" name="name" [(ngModel)]="form.name" required minlength="3"
           maxlength="20" #name="ngModel" />
         <div class="alert-danger" *ngIf="f.submitted && name.invalid">
-          <div *ngIf="name.errors.required">El nombre es obligatorio</div>
+          <div *ngIf="name.errors.required">{{ "SIGNUP.VALIDATIONS.NAME" | translate }}</div>
           <div *ngIf="name.errors.minlength">
-            El name debe contener al menos 3 carácteres
+            {{ "SIGNUP.VALIDATIONS.NAME_MIN" | translate }}
           </div>
           <div *ngIf="name.errors.maxlength">
-            El nombre debe contener 20 carácteres como máximo
+            {{ "SIGNUP.VALIDATIONS.NAME_MAX" | translate }}
           </div>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="surname">Primer apellido</label>
+        <label for="surname">{{ "SIGNUP.SURNAME" | translate }}</label>
         <input type="text" class="form-control" name="surname" [(ngModel)]="form.surname" required minlength="3"
           maxlength="20" #surname="ngModel" />
         <div class="alert-danger" *ngIf="f.submitted && surname.invalid">
-          <div *ngIf="surname.errors.required">El primer apellido es obligatorio</div>
+          <div *ngIf="surname.errors.required">{{ "SIGNUP.VALIDATIONS.SURNAME" | translate }}</div>
           <div *ngIf="surname.errors.minlength">
-            El apellido debe contener al menos 3 carácteres
+            {{ "SIGNUP.VALIDATIONS.SURNAME_MIN" | translate }}
           </div>
           <div *ngIf="surname.errors.maxlength">
-            El apellido debe contener 20 carácteres como máximo
+            {{ "SIGNUP.VALIDATIONS.SURNAME_MAX" | translate }}
           </div>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="surname2">Segundo apellido</label>
+        <label for="surname2">{{ "SIGNUP.SURNAME2" | translate }}</label>
         <input type="text" class="form-control" name="surname2" [(ngModel)]="form.surname2" #surname2="ngModel" />
       </div>
 
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="email">{{ "SIGNUP.EMAIL" | translate }}</label>
         <input type="email" class="form-control" name="email" [(ngModel)]="form.username" required email
           #email="ngModel" />
         <div class="alert-danger" *ngIf="f.submitted && email.invalid">
-          <div *ngIf="email.errors.required">El email es obligatorio</div>
+          <div *ngIf="email.errors.required">{{ "SIGNUP.VALIDATIONS.EMAIL" | translate }}</div>
           <div *ngIf="email.errors.email">
-            Debe introducir una dirección de email válida
+            {{ "SIGNUP.VALIDATIONS.EMAIL_VALID" | translate }}
           </div>
         </div>
       </div>
       <div class="form-group">
-        <label for="password">Contraseña</label>
+        <label for="password">{{ "SIGNUP.PASSWORD" | translate }}</label>
         <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6"
           #password="ngModel" />
         <div class="alert-danger" *ngIf="f.submitted && password.invalid">
-          <div *ngIf="password.errors.required">La contraseña es obligatoria</div>
+          <div *ngIf="password.errors.required">{{ "SIGNUP.VALIDATIONS.PASSWORD" | translate }}</div>
           <div *ngIf="password.errors.minlength">
-            La contraseña debe contener al menos 6 carácteres
+            {{ "SIGNUP.VALIDATIONS.PASSWORD_MIN" | translate }}
           </div>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="passwordValidate">Repita su contraseña</label>
+        <label for="passwordValidate">{{ "SIGNUP.PASSWORD_REPEAT" | translate }}</label>
         <input type="password" class="form-control" name="passwordValidate" [(ngModel)]="form.passwordValidate" required minlength="6"
           #passwordValidate="ngModel" />
         <div class="alert-danger" *ngIf="f.submitted && (passwordValidate.invalid || form.passwordValidate != form.password) ">
-          <div *ngIf="passwordValidate.errors && passwordValidate.errors.required">La validación de contraseña es obligatoria</div>
+          <div *ngIf="passwordValidate.errors && passwordValidate.errors.required">{{ "SIGNUP.VALIDATIONS.PASSWORD_REPEAT" | translate }}</div>
           <div *ngIf="form.passwordValidate != form.password">
-            La contraseña debe coincidir
+            {{ "SIGNUP.VALIDATIONS.PASSWORD_REPEAT_MATCH" | translate }}
           </div>
         </div>
       </div>
@@ -74,18 +74,17 @@
       <div class="form-check">
         <input type="checkbox"  id="registration" class="form-check-input" 
         name="registration" [(ngModel)]="form.registration" #registration="ngModel"/>
-        <label  for="registration" class="form-check-label small">Dispongo de acreditación de persona colaboradora /
-          responsable de colonias felinas</label>
+        <label  for="registration" class="form-check-label small">{{ "SIGNUP.REGISTERED" | translate }}</label>
       </div>
       <div class="form-group  text-center">
         <br>
-        <button class="btn btn-primary btn-block">Registrarse</button>
+        <button class="btn btn-primary btn-block">{{ "BUTTONS.REGISTER" | translate }}</button>
       </div>
     </form>
 
     <div class="alert alert-success" *ngIf="isSuccessful">
-     <p> Se ha registrado correctamente. </p>
-     <p>Ingrese a su cuenta <a href="/login">aquí</a></p>
+     <p> {{ "SIGNUP.CONFIRMATION" | translate }} </p>
+     <p>{{ "SIGNUP.LINK_TEXT" | translate }} <a href="/login">{{ "SIGNUP.LINK_TEXT2" | translate }}</a></p>
     </div>
   </div>
 </div>

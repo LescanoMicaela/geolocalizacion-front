@@ -1,4 +1,11 @@
 {
+    "MENU_BAR":{
+        "SIGN_UP": "Registro",
+        "LOGIN": "Login",
+        "LOGOUT": "Logout",
+        "WELCOME": "Bienvenido/a"
+    },
+    "GENERAL_ERROR": "Ups, ha ocurrido un error, por favor vuelva a intentarlo más tarde.",
     "COLONY_ALREADY_EXISTS_IN_LOCATION": "Ya existe una colonia registrada en esta localización",
     "Unauthorized": "Usuario no autenticado o token expirado",
     "NULL_FEEDING": "No hay alimentación registrada",
@@ -25,7 +32,8 @@
         "SAVE": "Guardar",
         "CANCEL": "Cancelar",
         "YES": "Si",
-        "NO": "No"
+        "NO": "No",
+        "REGISTER": "Registrarse"
     },
     "MODAL":{
         "SAVE_DATA": "¿Quiere guardar los datos?",
@@ -71,9 +79,9 @@
         "COLONY_FED": "Colonia alimentada"
     },
     "FOOTER":{
-        "MUST_BE": "Para registrar o alimentar una colonia debes",
-        "REGISTER": "registrarte",
-        "LOG": "ingresar a Su cuenta"
+        "MUST_BE": "Para registrar o alimentar una colonia debe",
+        "REGISTER": "registrarse",
+        "LOG": "ingresar a su cuenta"
     },
     "LOGIN":{
         "EMAIL":"Email",
@@ -95,6 +103,35 @@
         "MAP":"Mapa Colonias",
         "REGISTER":"Registrar Colonia",
         "FEED": "Alimentar Colonia"
+    },
+    "SIGNUP":{
+        "NAME": "Nombre",
+        "SURNAME": "Primer apellido",
+        "SURNAME2": "Segundo apellido",
+        "EMAIL": "Email",
+        "PASSWORD": "Contraseña",
+        "PASSWORD_REPEAT": "Repita su contraseña",
+        "REGISTERED": "Dispongo de acreditación de persona colaboradora responsable de colonias felinas",
+        "VALIDATIONS":{
+            "NAME":"El nombre es obligatorio",
+            "NAME_MIN": "El nombre debe contener al menos 3 carácteres",
+            "NAME_MAX": "El nombre debe contener 20 carácteres como máximo",
+            "SURNAME": "El primer apellido es obligatorio",
+            "SUNAME_MIN":"El apellido debe contener al menos 3 carácteres",
+            "SURNAME_MAX": "El apellido debe contener 20 carácteres como máximo",
+            "EMAIL": "El email es obligatorio",
+            "EMAIL_VALID": "Debe introducir una dirección de email válida",
+            "PASSWORD": "La contraseña es obligatoria",
+            "PASSWORD_MIN": "La contraseña debe contener al menos 6 carácteres",
+            "PASSWORD_REPEAT": "La validación de contraseña es obligatoria",
+            "PASSWORD_REPEAT_MATCH": "La contraseña debe coincidir"
+        },
+        "CONFIRMATION": "Se ha registrado correctamente.",
+        "LINK_TEXT": "Ingrese a su cuenta",
+        "LINK_TEXT2": "aquí",
+        "REGISTER_SUCCES": "Usuario/a registrado/a"
+
+
     }
     
     

@@ -1,23 +1,17 @@
-export class ColonyRequestModel{
+export class ColonyRequestModel {
 
-    id:number;
-
+    id: number;
     cats: number;
-
     register: boolean;
-
     lng: number;
-
     lat: number;
 
-
-
-    constructor(cats:number,register:boolean,
-        lng:number,lat:number){
-        this.cats=cats;
+    constructor(cats: number, register: boolean,
+        lng: number, lat: number) {
+        this.cats = cats;
         this.register = register;
-        this.lng=lng;
-        this.lat=lat;
+        this.lng = lng;
+        this.lat = lat;
     }
 
 
