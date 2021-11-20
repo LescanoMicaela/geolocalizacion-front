@@ -7,7 +7,7 @@
     "build": "ng build --prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "heroku-postbuild": "ng build — prod"
+    "heroku-postbuild": "ng build --prod"
   },
   "engines": {
     "node": "14.18.0",
