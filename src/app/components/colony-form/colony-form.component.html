@@ -22,7 +22,7 @@
             <div class="form-group">
                 <label for="cats"> {{ "FORM.CATS"| translate }}</label>
                 <input type="cats" class="form-control" name="cats" [(ngModel)]="form.cats" required #cats="ngModel" />
-                <div class="alert alert-danger" role="alert" *ngIf="f.submitted && cats.invalid && cats == 0">
+                <div class="alert alert-danger" role="alert" *ngIf="f.submitted && cats.invalid ">
                     <div *ngIf="cats.errors.required"> {{ "FORM.VALIDATION.CATS" | translate }}</div>
                 </div>
             </div>

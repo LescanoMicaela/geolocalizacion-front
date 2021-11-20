@@ -6,6 +6,7 @@ import { Observable, throwError } from 'rxjs';
 import { FeedingModel } from '../model/feeding.model';
 import { ColonyRequestModel } from '@app/model/colonyRequest.model';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { environment } from '../../environments/environment';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -15,8 +16,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ColonyService {
 
+   url = environment.apiBaseURL+"/v1";
 
-  private url = "http://localhost:8005/v1"
 
   constructor(private http: HttpClient, public translate: TranslateService) {
     this.translate = translate;
@@ -83,7 +84,7 @@ export class ColonyService {
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
       let errorMessage = '';
-      error.error.message ? errorMessage = error.error.message : errorMessage = error.error.error;
+      errorMessage = error.error.message ? error.error.message : error.error.error;
       this.translate.get(`${errorMessage}`)
         .subscribe((text) => errorMessage = text);
 

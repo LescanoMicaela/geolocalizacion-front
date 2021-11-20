@@ -82,9 +82,6 @@ export class MapComponent implements OnInit {
           })
       }
     }
-    if (changes['center']) {
-      this.center = this.center;
-    }
   }
 
 
@@ -114,14 +111,6 @@ export class MapComponent implements OnInit {
             return;
           }
 
-          const icon = {
-            url: place.icon as string,
-            size: new google.maps.Size(71, 71),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(17, 34),
-            scaledSize: new google.maps.Size(25, 25),
-          };
-
           // Create a marker for each place.
           this.markers.push(
             new google.maps.Marker({
@@ -146,7 +135,7 @@ export class MapComponent implements OnInit {
 
     }
 
-  };
+  }
 
 
   getAddress(lat: number, lng: number, colony: ColonyModel) {
@@ -158,9 +147,7 @@ export class MapComponent implements OnInit {
         } else {
           colony.direction = [this.translate.instant('MAP.NO_ADDRESS'), this.translate.instant('MAP.NO_NUMBER')]
         }
-      } else if (status === 'OVER_QUERY_LIMIT') {
-      }
-      else {
+      } else {
         colony.direction = [this.translate.instant('MAP.NO_ADDRESS'), this.translate.instant('MAP.NO_NUMBER')]
         console.log('Geocoder failed due to: ' + status);
       }

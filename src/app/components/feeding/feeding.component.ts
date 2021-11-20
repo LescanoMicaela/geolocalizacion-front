@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ColonyModel } from '@app/model/colony.model';
 import { ColonyService } from '@app/services/colony.service';
@@ -26,7 +26,7 @@ export class FeedingnComponent implements OnInit {
   colonies: ColonyModel[] = [];
   constructor(public service: ColonyService, private tokenStorage: TokenStorageService,
     private route: ActivatedRoute, private router: Router, public translate: TranslateService) {
-    
+
     this.service = service;
   }
 
@@ -35,7 +35,8 @@ export class FeedingnComponent implements OnInit {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.route.params.subscribe(routeParams => {
-        routeParams.id ? (this.id = routeParams.id, this.getColony(routeParams.id)) : null;
+        this.id = routeParams.id ?  routeParams.id : null;
+        if(this.id != null)  this.getColony(routeParams.id);
         this.waitForElement(this.id + '');
       });
       this.getColonies();

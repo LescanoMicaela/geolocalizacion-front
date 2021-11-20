@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ColonyModel } from '@app/model/colony.model';
 import { ColonyService } from '@app/services/colony.service';
+import { TokenStorageService } from '@app/services/token-storage.service';
 import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 
@@ -27,22 +28,24 @@ export class ColonyInfoComponent implements OnInit {
   imageAltInfo = 'more info icon'
   colonySelected: number;
   router: string;
+  isLoggedIn: boolean = false;
+
 
   @Input()
   colony: ColonyModel;
   constructor(public _router: Router, private route: ActivatedRoute, public service: ColonyService,
-    public translate: TranslateService) {
+    public translate: TranslateService,private tokenStorage: TokenStorageService) {
     this.router = _router.url;
     this._router = _router;
   }
 
   ngOnInit(): void {
     this.route.params.subscribe(routeParams => {
-      routeParams.id ? this.colonySelected = routeParams.id : null;
+      this.colonySelected = routeParams.id ?  routeParams.id : null;
     });
-  }
-
-  ngAfterViewInit() {
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+    }
   }
 
   scroll(id: number) {
@@ -104,15 +107,15 @@ export class ColonyInfoComponent implements OnInit {
           showCancelButton: true,
           confirmButtonText:  this.translate.instant('BUTTONS.SAVE') ,
           cancelButtonText: this.translate.instant('BUTTONS.CANCEL'),
-        }).then((result) => {
-          if (result.isConfirmed) {
+        }).then((r) => {
+          if (r.isConfirmed) {
             this.colony.cats = cats;
             this.service.updateColony(this.colony.id, this.colony).subscribe(resp => {
-              console.log("Result: " + result.value);
+              console.log("Result: " + r.value);
               Swal.fire(this.translate.instant('INFO.EDIT-MODAL.RESULT'), '', 'success')
             })
 
-          } else if (result.isDenied) {
+          } else if (r.isDenied) {
             Swal.fire(this.translate.instant('INFO.EDIT-MODAL.CANCEL'), '', 'info')
           }
         })

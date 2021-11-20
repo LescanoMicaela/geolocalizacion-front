@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ColonyModel } from '@app/model/colony.model';
 import { ColonyRequestModel } from '@app/model/colonyRequest.model';
 import { ColonyService } from '@app/services/colony.service';

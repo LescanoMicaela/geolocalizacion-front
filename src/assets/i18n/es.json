@@ -5,6 +5,7 @@
         "LOGOUT": "Logout",
         "WELCOME": "Bienvenido/a"
     },
+    "NO_COLONIES": "No existen registros de colonias.",
     "GENERAL_ERROR": "Ups, ha ocurrido un error, por favor vuelva a intentarlo más tarde.",
     "COLONY_ALREADY_EXISTS_IN_LOCATION": "Ya existe una colonia registrada en esta localización",
     "Unauthorized": "Usuario no autenticado o token expirado",
@@ -75,7 +76,7 @@
         "HAD":"La colonia tenía: ",
         "GIVEN": "Se ha proporcinado: ",
         "WATER": "Agua",
-        "FOOD": "Food",
+        "FOOD": "Comida",
         "COLONY_FED": "Colonia alimentada"
     },
     "FOOTER":{
