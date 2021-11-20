@@ -1,14 +1,12 @@
 {
-  "name": "geolocalizacion-felina",
+  "name": "geolocalizacion-front",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "node server.js",
+    "build": "ng build --prod",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "postinstall": "ng build --prod",
-    "preinstall": "npm install -g @angular/cli @angular/compiler-cli typescript"
+    "test": "ng test"
   },
   "engines": {
     "node": "14.18.0",
