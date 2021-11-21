@@ -44,7 +44,6 @@ export class FeedingnComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.form)
     this.saveFedding(this.form, this.id);
   }
 
@@ -118,5 +117,8 @@ export class FeedingnComponent implements OnInit {
     });
   }
 
+  cancel() {
+      this.router.navigate(['/alimentar']);
+  }
 
 }

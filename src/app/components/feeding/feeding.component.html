@@ -43,8 +43,11 @@
             </div>
         </div>
             <div class="form-group text-center mt-3">
-                <button class="btn btn-primary btn-block">
+                <button class="btn btn-primary btn-block my-2">
                     {{ "BUTTONS.SAVE" | translate }}
+                </button>
+                <button type="button" class="btn btn-danger btn-block mx-3"  (click)="cancel()">
+                    {{ "BUTTONS.CANCEL" | translate }}
                 </button>
             </div>
         </form>
