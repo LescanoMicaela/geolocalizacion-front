@@ -72,7 +72,7 @@ export class ColonyInfoComponent implements OnInit {
         let emptyAvailable = waterAvailable + foodAvailable == '' ? '/' : ''
 
         alimentacion += '<li><strong>' + el.time + ' </strong><br> <p>'+ self.translate.instant('INFO.HAD') + waterAvailable + ' ' + foodAvailable + emptyAvailable + '</p><p>'
-        self.translate.instant('INFO.HAD') + water + ' ' + food + empty + '</p></li>'
+        + self.translate.instant('INFO.WAS_GIVEN') + water + ' ' + food + empty + '</p></li>'
       });
 
       let direction1 = c.direction[1] ? c.direction[1] : "";
