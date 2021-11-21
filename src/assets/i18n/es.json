@@ -5,6 +5,7 @@
         "LOGOUT": "Logout",
         "WELCOME": "Bienvenido/a"
     },
+    "MUST": "* Indica un campo obligatorio",
     "NO_COLONIES": "No existen registros de colonias.",
     "GENERAL_ERROR": "Ups, ha ocurrido un error, por favor vuelva a intentarlo más tarde.",
     "COLONY_ALREADY_EXISTS_IN_LOCATION": "Ya existe una colonia registrada en esta localización",
@@ -48,7 +49,7 @@
         "REGISTER": "Colonia censada",
         "VALIDATION":{
             "DIRECTION": "Debe introducir una dirección correcta",
-            "CATS": "Debe introducir un número aproximado de gatos"
+            "CATS": "Debe introducir un número entre 1 y 99"
         }
     },
     "INFO": {
@@ -131,8 +132,6 @@
         "LINK_TEXT": "Ingrese a su cuenta",
         "LINK_TEXT2": "aquí",
         "REGISTER_SUCCES": "Usuario/a registrado/a"
-
-
     }
     
     

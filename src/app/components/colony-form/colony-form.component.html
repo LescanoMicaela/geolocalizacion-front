@@ -21,9 +21,9 @@
             </div>
             <div class="form-group">
                 <label for="cats"> {{ "FORM.CATS"| translate }}</label>
-                <input type="cats" class="form-control" name="cats" [(ngModel)]="form.cats" required #cats="ngModel" />
+                <input type="number" class="form-control" name="cats" [(ngModel)]="form.cats"  min="1" max="99" required #cats="ngModel" />
                 <div class="alert alert-danger" role="alert" *ngIf="f.submitted && cats.invalid ">
-                    <div *ngIf="cats.errors.required"> {{ "FORM.VALIDATION.CATS" | translate }}</div>
+                    <div *ngIf="cats.errors.required || cats.errors.min || cats.errors.max"> {{ "FORM.VALIDATION.CATS" | translate }}</div>
                 </div>
             </div>
 

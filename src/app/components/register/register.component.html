@@ -2,7 +2,7 @@
   <div class="card card-container">
     <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
       <div class="form-group">
-        <label for="name"> {{ "SIGNUP.NAME" | translate }}</label>
+        <label for="name"> {{ "SIGNUP.NAME" | translate }} *</label>
         <input type="text" class="form-control" name="name" [(ngModel)]="form.name" required minlength="3"
           maxlength="20" #name="ngModel" />
         <div class="alert-danger" *ngIf="f.submitted && name.invalid">
@@ -17,7 +17,7 @@
       </div>
 
       <div class="form-group">
-        <label for="surname">{{ "SIGNUP.SURNAME" | translate }}</label>
+        <label for="surname">{{ "SIGNUP.SURNAME" | translate }} *</label>
         <input type="text" class="form-control" name="surname" [(ngModel)]="form.surname" required minlength="3"
           maxlength="20" #surname="ngModel" />
         <div class="alert-danger" *ngIf="f.submitted && surname.invalid">
@@ -37,7 +37,7 @@
       </div>
 
       <div class="form-group">
-        <label for="email">{{ "SIGNUP.EMAIL" | translate }}</label>
+        <label for="email">{{ "SIGNUP.EMAIL" | translate }} *</label>
         <input type="email" class="form-control" name="email" [(ngModel)]="form.username" required email
           #email="ngModel" />
         <div class="alert-danger" *ngIf="f.submitted && email.invalid">
@@ -48,7 +48,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="password">{{ "SIGNUP.PASSWORD" | translate }}</label>
+        <label for="password">{{ "SIGNUP.PASSWORD" | translate }} *</label>
         <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6"
           #password="ngModel" />
         <div class="alert-danger" *ngIf="f.submitted && password.invalid">
@@ -60,7 +60,7 @@
       </div>
 
       <div class="form-group">
-        <label for="passwordValidate">{{ "SIGNUP.PASSWORD_REPEAT" | translate }}</label>
+        <label for="passwordValidate">{{ "SIGNUP.PASSWORD_REPEAT" | translate }} *</label>
         <input type="password" class="form-control" name="passwordValidate" [(ngModel)]="form.passwordValidate" required minlength="6"
           #passwordValidate="ngModel" />
         <div class="alert-danger" *ngIf="f.submitted && (passwordValidate.invalid || form.passwordValidate != form.password) ">
@@ -80,6 +80,8 @@
         <br>
         <button class="btn btn-primary btn-block">{{ "BUTTONS.REGISTER" | translate }}</button>
       </div>
+      <br>
+      <p><small>{{ "MUST" | translate }}</small></p>
     </form>
 
     <div class="alert alert-success" *ngIf="isSuccessful">
