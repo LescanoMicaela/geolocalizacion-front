@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
         Swal.fire({
           icon: 'success',
           title: this.translate.instant('SIGNUP.REGISTER_SUCCES'),
-          text:  this.translate.instant('MODAL.NOT_SAVED'),
+          text:  this.translate.instant('MODAL.SAVED'),
         })
       },
       err => {

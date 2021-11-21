@@ -10,7 +10,7 @@
 
     <map-info-window>{{ infoContent }}</map-info-window>
   </google-map>
-  <div *ngIf="!loading && colonies.length === 0" class="row p-3">
+  <div *ngIf="!loading && colonies.length === 0 && (router === '/colonias' || router.includes('/alimentar'))" class="row p-3">
     <p>No se ha registrado ninguna colonia.</p>
   </div>
   <div #directions *ngIf="(router === '/colonias' || router.includes('/alimentar') ) && !loading" id="direction"
