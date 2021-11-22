@@ -51,15 +51,26 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("hi")
+
+    console.log(this.center)
+
     navigator.geolocation.getCurrentPosition((position) => {
       this.locationPressed = true;
       this.center = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       }
+      
       this.getCurrentAddress(position.coords.latitude, position.coords.longitude)
       this.addMarker(position.coords.latitude, position.coords.longitude)
     })
+
+
+      if (!this.center) {
+        console.log(this.center)
+        this.center = { lat: 40.417209619587894, lng: -3.7034931891983027 }
+      }
   }
 
 
