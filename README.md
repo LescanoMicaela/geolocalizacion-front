@@ -1,27 +1,34 @@
-# GeolocalizacionFelina
+# Geolocalización de Colonias Felinas - front
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.9.
+Interface that consumes geolocalizacion-back service.
 
-## Development server
+## Getting Started
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-## Code scaffolding
+### Prerequisites
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Software you will need to install.
 
-## Build
+```
+1. Install npm
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+2. Clone repository: https://github.com/LescanoMicaela/geolocalizacion-front.git 
 
-## Running unit tests
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Starting application in local envioroment
 
-## Running end-to-end tests
+1. Start geolocalizacion-back project (https://github.com/LescanoMicaela/geolocalizacion-back)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+3. Install the npm packages described in the package.json and verify that it works:
 
-## Further help
+`npm install`
+`npm start`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+3. Start the application: `ng serve`
+
+2. Check the application on your browser:
+
+http://localhost:4200/
+
