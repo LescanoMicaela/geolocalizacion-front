@@ -1,0 +1,5 @@
+<div >
+<app-menu *ngIf="isLoggedIn"></app-menu>
+<app-map [colonies]=colonies></app-map>
+<app-footer *ngIf="!isLoggedIn" mt-2 ></app-footer>
+</div>

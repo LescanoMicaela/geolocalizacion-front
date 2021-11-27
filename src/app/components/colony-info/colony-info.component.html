@@ -1,0 +1,20 @@
+<div class="directions row colony pt-2" [ngClass]="{'colonySelected' : colonySelected == colony.id}" >
+<div class="col-1">
+</div>
+<div *ngIf="colony.direction" class=" col-9" (click)="scroll(colony.id)" [routerLink]="['/alimentar', colony.id]">
+  <p class="fw-bold m-1">{{colony.direction[0]}}</p>
+  <p>{{colony.direction[1]}}</p>
+  <p><img src="{{imageSrcCat}}" alt="{{imageAlt}}"> x {{colony.cats}}</p>
+  <p  *ngIf="colony.time" class="feeding-info">{{ "INFO.LAST_FEED" | translate }} {{colony.time}}</p>
+  <p  *ngIf="!colony.time" class="feeding-info">{{ "INFO.NO_RESULTS" | translate }}</p>
+
+  <div class="feed-image"><img  *ngIf="colony.water" src="{{imageSrcWater}}" alt="{{imageAltWater}}" />
+        
+    <img src="{{imageSrcFood}}"  *ngIf="colony.food" alt="{{imageAltFood}}" />
+  </div>
+</div>
+<div  class="col-1 buttons">
+  <img  (click)="showInfo(colony)" src="{{imageSrcInfo}}" alt="{{imageAltInfo}}" />
+  <img *ngIf="isLoggedIn"  (click)="edit(colony)"src="{{imageSrcEdit}}" alt="{{imageAltEdit}}">
+</div>
+</div>

@@ -1,0 +1,11 @@
+  <ul class="nav justify-content-center nav-justified">
+    <li class="nav-item" [ngClass]="{'active' : router == '/colonias'}">
+      <a class="nav-link" aria-current="page"  href="/colonias">{{ "MENU.MAP" | translate }}</a>
+    </li>
+    <li class="nav-item"  [ngClass]="{'active' : router==='/colonia'}">
+      <a class="nav-link" href="/colonia">{{ "MENU.REGISTER" | translate }}</a>
+    </li>
+    <li class="nav-item" [ngClass]="{'active' : router.includes('/alimentar')}">
+      <a class="nav-link" href="/alimentar">{{ "MENU.FEED" | translate }}</a>
+    </li>
+  </ul>

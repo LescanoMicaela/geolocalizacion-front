@@ -1,0 +1,56 @@
+.my-map-search-field {
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 25px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 60%;
+    border-radius: 6px;
+  }
+  
+  .my-map-search-field {
+    border-color: #4d90fe;
+  }
+
+  .directions {
+    overflow-y: scroll;
+    height: 25vh;
+    overflow-x: hidden; 
+
+  }
+.colony{
+  margin: 1.5em 0;
+}
+  .loading{
+    height: 20vh;
+  }
+
+  .directionsColonies{
+    height: 40vh;;
+  }
+
+  
+ ::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+::-webkit-scrollbar:vertical {
+  width: 12px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, .5);
+  border-radius: 10px;
+  border: 2px solid #ffffff;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #ffffff;
+}

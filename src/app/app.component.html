@@ -1,0 +1,27 @@
+<div id="app" class="container">
+    <div class="flex-fill">
+        <nav aria-label="Logged-out menu" *ngIf="!isLoggedIn" class="navbar navbar-expand navbar-primary flex-row-reverse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="/register" class="nav-link" routerLink="register">{{ "MENU_BAR.SIGN_UP" | translate }}</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/login" class="nav-link" routerLink="login">{{ "MENU_BAR.LOGIN" | translate }}</a>
+                </li>
+            </ul>
+        </nav>
+
+        <nav aria-label="Logged-in menu" *ngIf="isLoggedIn" class="navbar navbar-expand-lg flex-row-reverse p-2" style="justify-content: space-between;">
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href class="nav-link" (click)="logout()">{{ "MENU_BAR.LOGOUT" | translate }}</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+                {{ "MENU_BAR.WELCOME" | translate }} {{ username }}
+            </span>
+        </nav>
+        <router-outlet></router-outlet>
+    </div>
+</div>

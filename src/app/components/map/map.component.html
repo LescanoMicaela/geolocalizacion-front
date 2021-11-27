@@ -1,0 +1,32 @@
+<div>
+
+
+  <input *ngIf="!router.includes('/alimentar')" [(ngModel)]="enteredDirection" #mapSearchField
+    class="my-map-search-field" type="text" placeholder="Buscar" (keyup)="locationPressed = false" />
+  <google-map width="100%" height="35vh" [center]="center" [options]="options">
+    <map-marker #markerElem *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
+      [title]="marker.title" [options]="marker.options">
+    </map-marker>
+
+    <map-info-window>{{ infoContent }}</map-info-window>
+  </google-map>
+  <div *ngIf="!loading && colonies.length === 0 && (router === '/colonias' || router.includes('/alimentar'))" class="row p-3">
+    <p>No se ha registrado ninguna colonia.</p>
+  </div>
+  <div #directions *ngIf="(router === '/colonias' || router.includes('/alimentar') ) && !loading" id="direction"
+    [ngClass]="{'directionsColonies' : router === '/colonias'}" class="directions container mb-3">
+    <app-colony-info *ngFor=" let c of colonies;" id="{{c.id}}" width="100%" [colony]=c></app-colony-info>
+  </div>
+
+  <div *ngIf="loading && (router === '/colonias' || router.includes('/alimentar'))"
+    class="alert alert-info text-center mt-3 loading">
+    <h4 class="alert-heading">{{ "LOADING" | translate }}</h4>
+    <p>
+      <i class="fas fa-circle-notch fa-spin"></i>
+    </p>
+    <p class="mb-0">
+      {{ "WAIT" | translate }}
+    </p>
+  </div>
+
+</div>

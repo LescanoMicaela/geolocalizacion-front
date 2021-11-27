@@ -1,0 +1,138 @@
+{
+    "MENU_BAR":{
+        "SIGN_UP": "Registro",
+        "LOGIN": "Login",
+        "LOGOUT": "Logout",
+        "WELCOME": "Bienvenido/a"
+    },
+    "MUST": "* Indica un campo obligatorio",
+    "NO_COLONIES": "No existen registros de colonias.",
+    "GENERAL_ERROR": "Ups, ha ocurrido un error, por favor vuelva a intentarlo más tarde.",
+    "COLONY_ALREADY_EXISTS_IN_LOCATION": "Ya existe una colonia registrada en esta localización",
+    "Unauthorized": "Usuario no autenticado o token expirado",
+    "NULL_FEEDING": "No hay alimentación registrada",
+    "LOCATION_NOT_FOUND": "Localización no encontrada",
+    "LNG_NOT_FOUND": "Longitud no encontrada",
+    "LAT_NOT_FOUND": "Latitud no encontrada",
+    "TOKEN_NOT_FOUND": "El token ha expirado",
+    "EMAIL_ALREADY_REGISTERED": "Ya existe un/a usuario/o con este email",
+    "REGISTRATION_SUCCESSFUL": "Se ha registrado correctamente",
+    "REGISTRATION_UNSUCCESSFUL": "No se ha registrado",
+    "COLONY_NOT_FOUND": "No se ha encontrado la colonia",
+    "COLONY_NOT_SAVED": "No se ha registrado la colonia",
+    "FEEDING_NOT_SAVED": "No se han guardado los datos de la alimentación",
+    "LOCATION_NOT_SAVED": "No se ha guardado la localización",
+    "NO_USER_LOGGED": "No esta autenticado, ingrese en su cuenta por favor",
+    "NO_USER_FOUND": "No se ha encontrado al/a usuario/a",
+    "DATA_SAVED": "Se han guardado los datos correctamente",
+    "COLONY_SAVED": "Colonia registrada",
+    "NO_RESULTS": "No existen registros",
+    "SWAL":{
+        "COLONY_FORM_TITLE": "¿Quiere registar una colonia en la localización seleccionada?"
+    },
+    "BUTTONS":{
+        "SAVE": "Guardar",
+        "CANCEL": "Cancelar",
+        "YES": "Si",
+        "NO": "No",
+        "REGISTER": "Registrarse"
+    },
+    "MODAL":{
+        "SAVE_DATA": "¿Quiere guardar los datos?",
+        "NOT_SAVED": "No se han guardado los datos",
+        "SAVED": "Se han guardado los datos correctamente"
+    },
+    "FORM": {
+        "INTRODUCE_DIRECTION": "Para registrar una colonia introduzca la dirección en el buscador",
+        "DIRECTION": "Dirección",
+        "CATS": "Nº de gatos",
+        "REGISTER": "Colonia censada",
+        "VALIDATION":{
+            "DIRECTION": "Debe introducir una dirección correcta",
+            "CATS": "Debe introducir un número entre 1 y 99"
+        }
+    },
+    "INFO": {
+        "LAST_FEED": "Última alimentación el",
+        "NO_RESULTS": "No existen registros de alimentación",
+        "HAD": "Tenía: ",
+        "WAS_GIVEN": "Se proporcionó: ",
+        "REGISTERED_COLONY":"Colonia censada",
+        "UNREGISTERED_COLONY":"Colonia no censada",
+        "INFO": "Información",
+        "CATS": "Nº de gatos: ",
+        "FEED": "Alimentación",
+        "EDIT-MODAL":{
+            "TITLE":  "Editar colonia",
+            "TEXT": "Ingrese el nuevo número de gatos:",
+            "CONFIRM-TITLE": "Se editará el número de gatos",
+            "CONFIRM-TEXT": "¿Quire continuar?",
+            "RESULT": "Se ha modificado el número de gatos",
+            "CANCEL": "No se han guardado los cambios"
+        }
+    },
+    "FEEDING": {
+        "SELECT_ONE": "Debe seleccionar una colonia o en caso de que no exista registrarla",
+        "HERE": "aquí",
+        "HAD":"La colonia tenía: ",
+        "GIVEN": "Se ha proporcinado: ",
+        "WATER": "Agua",
+        "FOOD": "Comida",
+        "COLONY_FED": "Colonia alimentada"
+    },
+    "FOOTER":{
+        "MUST_BE": "Para registrar o alimentar una colonia debe",
+        "REGISTER": "registrarse",
+        "LOG": "ingresar a su cuenta"
+    },
+    "LOGIN":{
+        "EMAIL":"Email",
+        "PASSWORD": "Contraseña",
+        "LOGIN": "Login",
+        "VALIDATIONS":{
+            "EMAIL":"Debe introducir su email",
+            "PASSWORD": "Debe introducir su contraseña",
+            "INCORRECT": "Credenciales incorrectas"
+        }
+    },
+    "LOADING": "Cargando",
+    "WAIT": " Espere por favor",
+    "MAP":{
+        "NO_ADDRESS": "SIN DIRECCIÓN",
+        "NO_NUMBER": "SIN NÚMERO"
+    },
+    "MENU":{
+        "MAP":"Mapa Colonias",
+        "REGISTER":"Registrar Colonia",
+        "FEED": "Alimentar Colonia"
+    },
+    "SIGNUP":{
+        "NAME": "Nombre",
+        "SURNAME": "Primer apellido",
+        "SURNAME2": "Segundo apellido",
+        "EMAIL": "Email",
+        "PASSWORD": "Contraseña",
+        "PASSWORD_REPEAT": "Repita su contraseña",
+        "REGISTERED": "Dispongo de acreditación de persona colaboradora responsable de colonias felinas",
+        "VALIDATIONS":{
+            "NAME":"El nombre es obligatorio",
+            "NAME_MIN": "El nombre debe contener al menos 3 carácteres",
+            "NAME_MAX": "El nombre debe contener 20 carácteres como máximo",
+            "SURNAME": "El primer apellido es obligatorio",
+            "SUNAME_MIN":"El apellido debe contener al menos 3 carácteres",
+            "SURNAME_MAX": "El apellido debe contener 20 carácteres como máximo",
+            "EMAIL": "El email es obligatorio",
+            "EMAIL_VALID": "Debe introducir una dirección de email válida",
+            "PASSWORD": "La contraseña es obligatoria",
+            "PASSWORD_MIN": "La contraseña debe contener al menos 6 carácteres",
+            "PASSWORD_REPEAT": "La validación de contraseña es obligatoria",
+            "PASSWORD_REPEAT_MATCH": "La contraseña debe coincidir"
+        },
+        "CONFIRMATION": "Se ha registrado correctamente.",
+        "LINK_TEXT": "Ingrese a su cuenta",
+        "LINK_TEXT2": "aquí",
+        "REGISTER_SUCCES": "Usuario/a registrado/a"
+    }
+    
+    
+}
